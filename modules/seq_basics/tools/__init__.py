@@ -1,14 +1,21 @@
 """Tool registration for seq_basics.
 
-This package is intentionally organized as one file per tool.
-That makes it easy for teams to add/remove tools without merge conflicts.
+Tools are auto-discovered from this directory. Each .py file (except __init__.py
+and files starting with _) should contain:
+  - TOOL_META: dict with 'name', 'description', and optionally 'seq_param'
+  - A function matching the filename (e.g., translate.py has translate())
+
+Students don't need to modify this file.
 """
 
 from __future__ import annotations
 
-from .reverse_complement import register as _register_reverse_complement
-from .translate import register as _register_translate
+from pathlib import Path
+
+from .._plumbing import register_tools as _register_tools
+
 
 def register_tools(mcp) -> None:
-    _register_reverse_complement(mcp)
-    _register_translate(mcp)
+    """Auto-discover and register all tools in this directory."""
+    tools_dir = Path(__file__).parent
+    _register_tools(mcp, tools_dir)

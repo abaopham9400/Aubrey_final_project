@@ -2,9 +2,30 @@ from __future__ import annotations
 
 import asyncio
 import json
-from typing import Any, Dict, List, Optional
-from io import StringIO
-from Bio import SeqIO
+from pathlib import Path
+from typing import Any, Dict, List
+
+from dotenv import load_dotenv
+from fastmcp import Client
+from google import genai
+from google.genai import types
+
+
+def _load_skill_context(modules_dir: Path) -> str:
+    """Load SKILL.md files from all modules and combine them."""
+    skill_texts = []
+
+    for module_dir in sorted(modules_dir.iterdir()):
+        if not module_dir.is_dir() or module_dir.name.startswith("_"):
+            continue
+
+        skill_file = module_dir / "SKILL.md"
+        if skill_file.exists():
+            skill_texts.append(skill_file.read_text())
+
+    return "\n\n---\n\n".join(skill_texts)
+
+
 def _strip_ctx_from_schema(schema: dict) -> dict:
     schema = dict(schema or {})
     props = dict(schema.get("properties", {}))
@@ -16,12 +37,8 @@ def _strip_ctx_from_schema(schema: dict) -> dict:
 
     return schema
 
-from dotenv import load_dotenv
-from fastmcp import Client
-from google import genai
-from google.genai import types
 
-def _capabilities_to_system_content(mcp_tools, mcp_resources) -> types.Content:
+def _capabilities_to_system_content(mcp_tools, mcp_resources, skill_context: str = "") -> types.Content:
     """Serialize MCP tools and resources into a system message for the LLM."""
     tools_json = []
     for t in mcp_tools:
@@ -36,8 +53,12 @@ def _capabilities_to_system_content(mcp_tools, mcp_resources) -> types.Content:
         uri_obj = getattr(r, "uri", None) or getattr(r, "name", None)
         uri_str = str(uri_obj) if uri_obj is not None else None
 
+        # Extract resource name from URI for easier reference
+        resource_name = uri_str.split("/")[-1] if uri_str else None
+
         resources_json.append({
             "uri": uri_str,
+            "name": resource_name,
             "description": getattr(r, "description", ""),
         })
 
@@ -46,16 +67,21 @@ def _capabilities_to_system_content(mcp_tools, mcp_resources) -> types.Content:
         "mcp_resources": resources_json,
         "instruction": (
             "You may call MCP tools using their schemas. "
-            "If a user refers to a plasmid, file, or dataset, "
-            "select the appropriate resource URI from mcp_resources. "
-            "The client will resolve resources into sequences before calling tools."
+            "Tools that operate on sequences accept either a resource name (e.g., 'pBR322') "
+            "or a raw DNA sequence string. Prefer using resource names when available. "
+            "The server will resolve resource names to their sequences automatically."
         ),
     }
+
+    system_text = "SYSTEM CONTEXT (capabilities, not user input):\n" + json.dumps(payload, indent=2)
+
+    # Add skill context if available
+    if skill_context:
+        system_text += "\n\n--- SKILL GUIDANCE ---\n\n" + skill_context
+
     return types.Content(
         role="model",
-        parts=[types.Part.from_text(
-            text="SYSTEM CONTEXT (capabilities, not user input):\n" + json.dumps(payload, indent=2)
-        )],
+        parts=[types.Part.from_text(text=system_text)],
     )
 
 def _mcp_tool_to_function_declaration(tool: Any) -> types.FunctionDeclaration:
@@ -119,28 +145,6 @@ def _prompt_messages_to_gemini_contents(prompt_result: Any) -> List[types.Conten
 
     return out
 
-async def _genbank_resource_to_sequence(mcp: Client, uri: str) -> str:
-    """Client-side adapter: read a GenBank MCP resource and return its DNA sequence."""
-    parts = await mcp.read_resource(uri)
-
-    text_chunks = []
-    for p in parts:
-        if hasattr(p, "text") and p.text is not None:
-            text_chunks.append(p.text)
-        elif hasattr(p, "blob") and p.blob is not None:
-            text_chunks.append(p.blob.decode("utf-8"))
-
-    if not text_chunks:
-        raise ValueError(f"Resource {uri} did not contain readable GenBank data.")
-
-    text = "\n".join(text_chunks)
-    record = SeqIO.read(StringIO(text), "genbank")
-
-    if not record.seq:
-        raise ValueError(f"GenBank record in {uri} contains no sequence.")
-
-    return str(record.seq)
-
 
 def _print_help() -> None:
     print(
@@ -186,7 +190,11 @@ async def run_chat() -> None:
         mcp_resources = await mcp.list_resources()
         mcp_prompts = await mcp.list_prompts()
 
-        system_capabilities_content = _capabilities_to_system_content(mcp_tools, mcp_resources)
+        # Load skill context from SKILL.md files
+        modules_dir = Path(__file__).parent / "modules"
+        skill_context = _load_skill_context(modules_dir)
+
+        system_capabilities_content = _capabilities_to_system_content(mcp_tools, mcp_resources, skill_context)
 
         print("\nConnected to MCP server.")
         print("Discovered tools:")
@@ -301,11 +309,6 @@ async def run_chat() -> None:
                     tool_name = fc.name
                     tool_args = dict(fc.args or {})
 
-                    # Option A: client resolves GenBank resources to sequences
-                    if "uri" in tool_args:
-                        seq = await _genbank_resource_to_sequence(mcp, tool_args["uri"])
-                        tool_args = {"sequence": seq}
-
                     print(f"\nGemini chose tool: {tool_name}")
                     print("Args:")
                     print(json.dumps(tool_args, indent=2))
@@ -362,11 +365,6 @@ async def run_chat() -> None:
             fc = function_calls[0]
             tool_name = fc.name
             tool_args = dict(fc.args or {})
-
-            # Option A: client resolves GenBank resources to sequences
-            if "uri" in tool_args:
-                seq = await _genbank_resource_to_sequence(mcp, tool_args["uri"])
-                tool_args = {"sequence": seq}
 
             print(f"\nGemini chose tool: {tool_name}")
             print("Args:")
