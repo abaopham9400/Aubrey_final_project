@@ -80,21 +80,27 @@ Your Python code does.
 ---
 
 # 4. Project Structure Overview
-```bash
-server.py # Starts MCP server
-client_gemini.py # Gemini-based CLI client
 ```
-```bash
-modules/
-    init.py
-
-seq_basics/
-    SKILL.md
-    _utils.py
-    _plumbing/
-    resources/
-    data/
-    tools/
+.
+├── server.py                 # MCP server entry point
+├── client_gemini.py          # Gemini-powered CLI client
+├── SPEC.md                   # Architecture specification
+├── requirements.txt
+├── tests/
+│   └── confest.py          
+│   ├── test_registration_smoke.py 
+│   ├── test_resolve.py
+│   ├── test_tools.py
+├── modules/
+│   └── seq_basics/           # Example module
+│       ├── SKILL.md          # LLM guidance for this module
+│       ├── _plumbing/        # Auto-registration (don't modify)
+│       ├── _utils.py         # Shared constants (codon table, etc.)
+│       ├── data/
+│       │   └── pBR322.gb     # Sequence resources
+│       └── tools/
+│           ├── translate.py
+│           └── reverse_complement.py
 ```
 You mostly work inside:
 ```bash
@@ -122,7 +128,7 @@ Create a file named .env in the project root:
 ```bash
 GEMINI_API_KEY="your_key_here"
 ```
-##Step 3 — Run the Client
+## Step 3 — Run the Client
 ```bash
 python client_gemini.py
 ```
@@ -244,6 +250,7 @@ Create .env with:
 GEMINI_API_KEY="..."
 ```
 - Gemini 503 Error
+
 This means high demand. Retry later.
 
 
