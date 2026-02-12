@@ -252,5 +252,8 @@ GEMINI_API_KEY="..."
 - Gemini 503 Error
 
 This means high demand. Retry later.
-
+---
+## Any issues ?
+send an email to: 
+> javadamn@berkeley.edu
 
