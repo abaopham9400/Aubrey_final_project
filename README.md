@@ -19,7 +19,7 @@ You write **normal Python functions** that perform biology-related computations.
 
 > **The golden rule:** You write the biology logic. The framework connects it to the AI. The AI does *not* perform the biological computation; your Python code does. The AI simply interprets your results.
 
-# Design Philosophy of This Starter
+## Design philosophy of this starter
 
 This project follows four key principles:
 
