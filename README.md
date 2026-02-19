@@ -1,51 +1,97 @@
-# BioE234 MCP Starter
+# BioE234 MCP Starter — Student Guide
 
-A minimal MCP (Model Context Protocol) server for bioinformatics, with a Gemini-powered CLI client for testing.
+Welcome! This document explains how the BioE234 MCP Starter works and how you can extend it for your final project.
 
-## Overview
+This guide assumes some students may be new to coding and will walk you through everything step-by-step.
 
-This project provides a framework for building bioinformatics tools that can be used with LLM assistants like Claude Code or Google Gemini. Students write pure Python functions for sequence analysis; the framework handles all MCP connectivity automatically.
+---
 
-**Key features:**
-- Auto-discovery of tools and resources (no registration code needed)
-- Tools accept resource names or raw sequences interchangeably
-- SKILL.md files provide domain guidance to LLMs
-- Compatible with both Claude Code and Gemini
+# 1. What is this starter?
 
-## Quick Start
+This repository is a framework for building **bioengineering automation tools** that can be used by an AI assistant via **MCP (Model Context Protocol)**.
 
-1. **Create a virtual environment**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # macOS/Linux
-   # or: .venv\Scripts\Activate.ps1  # Windows
-   ```
+You write **normal Python functions** that perform biology-related computations. The framework handles:
+- Connecting your tools to an AI model,
+- Auto-discovering tools you write,
+- Loading sequence files (like `.gb` or `.fasta`),
+- Accepting both resource names and raw sequences,
+- Handling input validation.
 
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+> **The golden rule:** You write the biology logic. The framework connects it to the AI. The AI does *not* perform the biological computation; your Python code does. The AI simply interprets your results.
 
-3. **Configure environment**
+# Design Philosophy of This Starter
 
-   Create a `.env` file with your Gemini API key:
-   ```
-   GEMINI_API_KEY="YOUR_KEY_HERE"
-   ```
-   Get a free key at https://ai.google.dev
+This project follows four key principles:
 
-4. **Run the client**
-   ```bash
-   python client_gemini.py
-   ```
+1. Students write **pure Python functions**
+   - Your code focuses only on biology logic
+   - No networking, MCP, or API code required
 
-## Project Structure
+2. Convention over configuration
+   - The system auto-discovers tools based on filenames and structure
+   - If you follow the conventions, everything just works
 
+3. No plumbing in tool files
+   - You never import MCP or registration code in your tools
+   - The framework handles all wiring automatically
+
+4. Copy–modify–extend workflow
+   - New tools are created by copying an example and editing it
+   - You don’t need to understand the full framework to start building
+
+
+---
+
+# 2. Core concepts
+
+## Tools
+A **tool** is a Python function you write to perform a specific computation.
+*Examples:* Translate DNA → protein, reverse complement, compute GC content, scan for PAM sites, or design primers.
+*Location:* `modules/seq_basics/tools/`
+
+## Resources
+A **resource** is a data file that your tools can use.
+*Examples:* GenBank files (`.gb`), FASTA files (`.fasta`).
+*Location:* `modules/seq_basics/data/`
+
+Each file you place here automatically becomes available as a named resource. For example, if you add `pBR322.gb`, the resource name the AI uses will be `"pBR322"`.
+
+---
+
+# 3. How the pipeline works
+
+When you run the project:
+
+1. The MCP server starts.
+2. It scans your module folders.
+3. It automatically registers:
+   - Tools
+   - Resources
+4. The AI assistant can now call your tools.
+5. Your Python function runs.
+6. The AI explains the result.
+
+Important:
+
+The AI does NOT perform the biological computation.
+Your Python code does.
+
+---
+
+# 4. Project structure overview
+
+Here is a map of the files you just downloaded. You will spend almost all of your time in the `tools` and `data` folders.
 ```
 .
 ├── server.py                 # MCP server entry point
 ├── client_gemini.py          # Gemini-powered CLI client
 ├── SPEC.md                   # Architecture specification
+├── requirements.txt
+├── tests/
+│   └── confest.py          
+│   ├── test_registration_smoke.py 
+│   ├── test_resolve.py
+│   ├── test_tools.py
 ├── modules/
 │   └── seq_basics/           # Example module
 │       ├── SKILL.md          # LLM guidance for this module
@@ -57,121 +103,195 @@ This project provides a framework for building bioinformatics tools that can be 
 │           ├── translate.py
 │           └── reverse_complement.py
 ```
-
-## Adding a New Tool
-
-1. Copy an existing tool file:
-   ```bash
-   cp modules/seq_basics/tools/translate.py modules/seq_basics/tools/gc_content.py
-   ```
-
-2. Edit the new file:
-   ```python
-   """Calculate GC content of a DNA sequence."""
-
-   TOOL_META = {
-       "name": "gc_content",
-       "description": "Calculate the GC content (proportion of G and C bases).",
-       "seq_param": "seq",
-   }
-
-   def gc_content(seq: str) -> float:
-       """Calculate GC content.
-
-       Args:
-           seq: DNA sequence (resource name or raw sequence)
-
-       Returns:
-           GC content as a fraction (0.0 to 1.0)
-       """
-       gc = sum(1 for b in seq if b in "GC")
-       return gc / len(seq) if seq else 0.0
-
-   if __name__ == "__main__":
-       print(gc_content("ATGCGCTA"))  # 0.5
-   ```
-
-3. Restart the server. The tool is auto-discovered.
-
-## Adding a New Resource
-
-1. Drop a sequence file in `data/`:
-   ```bash
-   cp my_plasmid.gb modules/seq_basics/data/
-   ```
-
-2. Optionally add metadata:
-   ```bash
-   echo '{"description": "My custom plasmid"}' > modules/seq_basics/data/my_plasmid.meta.json
-   ```
-
-3. Restart the server. The resource is auto-discovered.
-
-## Available Tools
-
-### dna_translate
-Translate DNA to protein using the standard genetic code.
-
-```
-dna_translate(seq="pBR322", start=0, end=300, frame=1)
-dna_translate(seq="ATGGCTAGC")
-```
-
-### dna_reverse_complement
-Return the reverse complement of a DNA sequence.
-
-```
-dna_reverse_complement(seq="pBR322")
-dna_reverse_complement(seq="ATGCGATCG")
-```
-
-## Client Commands
-
-```
-/help                         Show help
-/tools                        List available tools
-/resources                    List available resources
-/resource <uri>               Read a resource
-/prompts                      List prompts
-/prompt <name> [json_args]    Render and run a prompt
-```
-
-Or just type natural language requests:
-```
-You: Translate the first 100bp of pBR322 in frame 2
-```
-
-## Claude Code Integration
-
-This project is designed to work with Claude Code. To use as an MCP server:
-
-1. Add to your Claude Code MCP settings
-2. Tools and resources will be available in Claude Code
-3. SKILL.md provides guidance automatically
-
-To make skills discoverable by Claude Code, symlink them:
+You mostly work inside:
 ```bash
-mkdir -p .claude/skills/seq-basics
-ln -s ../../../modules/seq_basics/SKILL.md .claude/skills/seq-basics/SKILL.md
+modules/seq_basics/tools/
+modules/seq_basics/data/
 ```
 
-## Architecture
 
-See [SPEC.md](SPEC.md) for the full architecture specification, including:
-- Tool file conventions
-- Sequence resolution logic
-- Auto-discovery flow
-- SKILL.md format
+---
 
-## For Students
+# 5. Step-by-step quick start
 
-Focus on writing pure functions in `tools/`. The framework handles:
-- MCP registration
-- Resource name resolution
-- Sequence format parsing (GenBank, FASTA, raw)
-- Input validation
+## Step 0: Prerequisites
 
-Your functions receive clean sequence strings and return results. Test standalone:
+Before you begin, ensure you have the following installed on your computer:
+
+1. Python (3.10 or newer)
+2. Visual Studio Code (VS Code): A free code editor. 
+3. Open this project folder inside VS Code. Open a new terminal inside VS Code by clicking `Terminal -> New Terminal` at the top of your screen.
+
+
+## Step 1  — Create a virtual environment and install dependencies
+
+A virtual environment keeps this project's files isolated from the rest of your computer. Run these commands in your terminal:
+
 ```bash
-python -m modules.seq_basics.tools.translate
+python -m venv .venv
+source .venv/bin/activate
 ```
+
+*(You will know it worked if you see* `(.venv)` *appear at the start of your terminal line).*
+
+Now, install the required software packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+
+## Step 2 — Add your Gemini API Key
+
+You need a key to let your code talk to the Gemini AI.
+
+1. In the root folder of your project, create a new file and name it exactly .env (don't forget the dot!).
+2. Open the file and add your key like this:
+
+```bash
+GEMINI_API_KEY="your_key_here"
+```
+
+> 🛑 SECURITY WARNING: NEVER upload your `.env` file to GitHub or share it with anyone. If you are using Git, ensure `.env` is listed inside your `.gitignore` file.
+
+## Step 3 — Run the Client
+
+You are ready to go! Start the program:
+
+```bash
+python client_gemini.py
+```
+
+Try typing a prompt like:
+```bash
+Translate the first 60bp of pBR322 in frame 1
+```
+---
+# 6. Adding a new tool 
+
+Your tool should behave like a normal Python function:
+- Takes inputs
+- Returns outputs
+- No file loading
+- No networking
+- No printing inside the function
+
+This makes your code easy to test with `pytest`, reusable outside MCP, and easier to debug and maintain.
+
+To add a new capability, create a new `.py` file inside `modules/seq_basics/tools/`.
+
+***Example:*** Let's create `dna_gc_content.py`
+
+
+```bash
+"""Compute GC content of a DNA sequence."""
+
+# This dictionary tells the AI how to use your tool
+TOOL_META = {
+    "name": "dna_gc_content",
+    "description": "Compute GC content (fraction of G/C bases).",
+    "seq_param": "seq",
+}
+
+def gc_content(seq: str) -> float:
+    """Return GC fraction between 0 and 1."""
+    seq = seq.upper()
+    gc = sum(1 for b in seq if b in "GC")
+    return gc / len(seq) if seq else 0.0
+```
+
+When the server starts, it automatically:
+
+1. Scans `tools/` for Python files
+2. Registers each tool that defines `TOOL_META`
+3. Scans `data/` for sequence files
+4. Registers each file as a resource
+
+That’s why:
+- You don’t need to manually register tools
+- Restarting the server makes new tools appear automatically
+
+Important rules for tools:
+
+- The Python file name must match the function name (e.g., `gc_content.py` for `def gc_content`). This rule allows the framework to auto-discover your tool.
+- You must include the `TOOL_META` dictionary.
+- Always use type hints (e.g., `seq: str`).
+- Return JSON-serializable values (str, int, float, list, dict).
+
+***Restart the server*** (stop the terminal and run python `client_gemini.py` again) for your new tool to appear.
+---
+
+# 7. Tools with multiple sequences
+
+If your tool compares two things, for example, specify multiple parameters in `TOOL_META`.
+```bash
+TOOL_META = {
+    "name": "dna_hamming_distance",
+    "description": "Count mismatches between two sequences.",
+    "seq_params": ["seq1", "seq2"],
+}
+
+def hamming_distance(seq1: str, seq2: str) -> int:
+    if len(seq1) != len(seq2):
+        raise ValueError("Sequences must have equal length")
+    return sum(a != b for a, b in zip(seq1, seq2))
+```
+
+*Note: Both* `seq1` *and* `seq2` *can be resource names (like "pBR322") or raw pasted sequences.*
+
+When you pass `seq="something"`, the framework automatically decides what it means:
+
+1. If the value matches a known resource name → load that file
+2. If the value starts with "LOCUS" → treat as GenBank content
+3. If the value starts with ">" → treat as FASTA content
+4. Otherwise → treat as a raw DNA/RNA string
+
+This means your tool always receives a clean sequence string. You never need to parse files manually inside your tool.
+
+---
+# 8. Non-sequence inputs
+
+Your tools can accept numbers, text, and other variables.
+```bash
+def find_pam_sites(seq: str, pam: str = "NGG", max_mismatch: int = 2) -> list[dict]:
+    ...
+```
+
+Guidelines:
+
+- Always validate inputs.
+- Raise a `ValueError` with clear messages if the AI or user provides bad data.
+- Return JSON-friendly data.
+---
+#9. Adding new sequence files
+Drop any `.gb` or `.fasta` files into `modules/seq_basics/data/`. Restart your terminal server, and the file instantly becomes a resource the AI can read.
+
+---
+# 10. Creating a new module
+
+If your final project grows large, you can organize it by creating new module folders:
+
+- `modules/crispr/`
+- `modules/cloning/`
+- `modules/pathways/`
+
+Each new module should contain its own `tools/`, `data/`, and a `SKILL.md` file to guide the AI (*Note: You may need to update* `modules/__init__.py` *to register new module folders*).
+---
+# 11. Testing your code
+
+We use `pytest` to make sure code works. Run this command in your terminal to run the automated test suite:
+```bash
+pytest -vv -l
+```
+---
+# 12. Troubleshooting
+- ***API Key Missing Error:*** Ensure you created the `.env` file correctly in the main folder and that it contains `GEMINI_API_KEY="..."`.
+
+- ***Gemini 503 Error:*** This means the Google servers are experiencing high demand. Wait a few minutes and try again.
+
+- ***Command Not Found (***`python`***):*** You may need to type `python3` instead of `python` on Mac/Linux.
+---
+## Still stuck?
+Send an email to your TA at: 
+> javadamn@berkeley.edu
+
