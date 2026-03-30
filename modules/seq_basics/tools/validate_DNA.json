@@ -1,0 +1,44 @@
+{
+  "id": "org.bioe234.function.seq.validate_DNA.v1",
+  "name": "Validate DNA Sequence",
+  "description": "Return a boolean of whether the input is a valid DNA sequence.",
+  "type": "function",
+  "keywords": ["DNA", "sequence", "valid"],
+  "date_created": "3/30/26",
+  "date_last_modified": "3/30/26",
+
+  "inputs": [
+    {
+      "name": "seq",
+      "type": "string",
+      "description": "DNA sequence containg A, T, C, or G"
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "boolean",
+      "description": "True or False depending if seq only contains A, T, C, or G, with no spaces, numbers, ,lowercase, or other letters."
+    }
+  ],
+
+  "examples": [
+    {
+      "input":  { "seq": "ATGC" },
+      "output": { "result": "True" }
+    },
+    {
+      "input":  { "seq": "ATCMG" },
+      "output": { "result": "False" }
+    }
+  ],
+
+  "execution_details": {
+    "language": "Python",
+    "source": "modules/seq_basics/tools/validate_DNA.py",
+    "initialization": null,
+    "execution": "validate_DNA",
+    "mcp_name": "validate_DNA",
+    "seq_params": ["seq"]
+  }
+}

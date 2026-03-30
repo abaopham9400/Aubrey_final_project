@@ -9,7 +9,7 @@ direct imports continue to work for students who prefer that style.
 
 import pytest
 
-from modules.seq_basics.tools.translate import translate
+from modules.seq_basics.tools.find_pam import translate
 from modules.seq_basics.tools.reverse_complement import reverse_complement
 
 

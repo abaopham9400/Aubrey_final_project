@@ -1,0 +1,44 @@
+{
+  "id": "org.bioe234.function.seq.find_pam.v1",
+  "name": "Finding pam index",
+  "description": "Finds the position of the pam sequence",
+  "type": "function",
+  "keywords": ["pam", "GG", "sequence"],
+  "date_created": "3/30/26",
+  "date_last_modified": "3/30/26",
+
+  "inputs": [
+    {
+      "name": "target",
+      "type": "string",
+      "description": "A DNA sequence with more than 20bp"
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "integer",
+      "description": "The index position of the pam sequence"
+    }
+  ],
+
+  "examples": [
+    {
+      "input":  { "seq": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": "36" }
+    },
+    {
+      "input":  { "seq": "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": "40" }
+    }
+  ],
+
+  "execution_details": {
+    "language": "Python",
+    "source": "modules/seq_basics/tools/find_pam.py",
+    "initialization": null,
+    "execution": "find_pam",
+    "mcp_name": "find_pam",
+    "seq_params": ["target"]
+  }
+}
