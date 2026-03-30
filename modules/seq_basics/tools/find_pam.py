@@ -25,8 +25,9 @@ def find_PAM(target):
     """
     if not validate_DNA(target):
         raise ValueError("Invalid target sequence")
+    if len(target) < 23:
+        raise ValueError(f"Target sequence must be at least 23bp (20bp guide + 3bp PAM). Provided length: {len(target)}")
 
-    # TODO:  check if we should allowed for varied pam sequences, not just GG
     if target[21:].find('GG') == -1:
       raise ValueError("Does not contain valid PAM")
 

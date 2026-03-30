@@ -1,0 +1,44 @@
+{
+  "id": "org.bioe234.function.seq.find_protospacer.v1",
+  "name": "Finding the protospacer",
+  "description": "Finds the 20bp sequence upstream of NGG",
+  "type": "function",
+  "keywords": ["protospacer", "pam sequence", "sequence"],
+  "date_created": "3/30/26",
+  "date_last_modified": "3/30/26",
+
+  "inputs": [
+    {
+      "name": "target",
+      "type": "string",
+      "description": "A DNA sequence with more than 20bp"
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "string",
+      "description": "The protospacer sequence, 20bp upstream of NGG"
+    }
+  ],
+
+  "examples": [
+    {
+      "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": "TGGCTCAGAAACCTGCCAGT" }
+    },
+    {
+      "input":  { "target": "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": "AGTACGATCAACCTGCCAGT" }
+    }
+  ],
+
+  "execution_details": {
+    "language": "Python",
+    "source": "modules/seq_basics/tools/find_protospacer.py",
+    "initialization": null,
+    "execution": "find_protospacer",
+    "mcp_name": "find_protospacer",
+    "seq_params": ["target"]
+  }
+}
