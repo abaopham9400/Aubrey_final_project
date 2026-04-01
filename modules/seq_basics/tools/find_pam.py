@@ -1,7 +1,7 @@
 from typing import Optional
 from validate_DNA import validate_DNA
 
-def find_PAM(target):
+def find_pam(target):
     """
     Description:
         Finds the position of all occurrence of the 'GG' PAM sequence in a DNA target sequence.
@@ -38,7 +38,7 @@ def find_PAM(target):
 
     # If no GG is found at all after index 21, raise the error immediately
     if current_pos == -1:
-        raise ValueError("Does not contain valid PAM")
+        return []
 
     while current_pos != -1:
         pam_indices.append(current_pos)
@@ -52,28 +52,28 @@ def find_PAM(target):
 # ---------------------------------------------------------------------------
 #Module-level alias — keeps existing tests and direct imports working.
 #
-#   from modules.seq_basics.tools.find_pam import find_PAM
+#   from modules.seq_basics.tools.find_pam import find_pam
 #
 # The alias creates ONE shared instance and exposes run() as a plain callable.
 # ---------------------------------------------------------------------------
-#_instance = find_PAM()
+#_instance = find_pam()
 #_instance.initiate()
-#find_PAM = _instance.run   # callable: find_pam(target) -> int
+#find_pam = _instance.run   # callable: find_pam(target) -> int
  
  
 # Standalone test
 if __name__ == "__main__":
     test = "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #1: {find_PAM(test)}") # should find GG at index [32]
+    print(f"Test #1: {find_pam(test)}") # should find GG at index [32]
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #2: {find_PAM(test)}") # should find GG at index [40]
+    print(f"Test #2: {find_pam(test)}") # should find GG at index [40]
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCGGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #3: {find_PAM(test)}") # should find GG at index [32,40]
+    print(f"Test #3: {find_pam(test)}") # should find GG at index [32,40]
 
     test = "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #4: {find_PAM(test)}") # should find GG at index [36,73]
+    print(f"Test #4: {find_pam(test)}") # should find GG at index [36,73]
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #3: {find_PAM(test)}") # should not find any valid GG
+    print(f"Test #3: {find_pam(test)}") # should not find any valid GG and return []
