@@ -4,20 +4,24 @@ from validate_DNA import validate_DNA
 def find_PAM(target):
     """
     Description:
-        Finds the position of the first occurrence of the 'GG' PAM sequence in a DNA target sequence.
+        Finds the position of all occurrence of the 'GG' PAM sequence in a DNA target sequence.
 
     Input:
         target (str): The DNA sequence to be searched. The input string must consist of valid DNA
                       nucleotides ('A', 'T', 'C', 'G').
 
     Output:
-        int: The index of the first occurrence of 'GG' in the target sequence after the 23rd position.
+        list: The index of all occurrence of 'GG' in the sequence after the 23rd position.
 
     Tests:
         - Case:
             Input: seq="CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-            Expected Output: 36
+            Expected Output: [36]
             Description: Basic sequence.
+        - Case:
+            Input: seq="CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
+            Expected Output: [36,73]
+            Description: multiple pam sites
         - Case:
             Input: seq="CCCTAGATGCCTGGCGGAGAAACCTGCCAGTTTGCTGTCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
             Expected Exception: ValueError
@@ -28,12 +32,21 @@ def find_PAM(target):
     if len(target) < 23:
         raise ValueError(f"Target sequence must be at least 23bp (20bp guide + 3bp PAM). Provided length: {len(target)}")
 
-    if target[21:].find('GG') == -1:
-      raise ValueError("Does not contain valid PAM")
+    pam_indices = []
+    # Start searching from index 21
+    current_pos = target.find('GG', 21)
 
-    pam_index = target.find("GG", 21)
+    # If no GG is found at all after index 21, raise the error immediately
+    if current_pos == -1:
+        raise ValueError("Does not contain valid PAM")
 
-    return pam_index
+    while current_pos != -1:
+        pam_indices.append(current_pos)
+        # To find the NEXT instance, start searching from current_pos + 1
+        # This allows for overlapping 'GGG' to return both indices
+        current_pos = target.find('GG', current_pos + 1)
+
+    return pam_indices
  
  
 # ---------------------------------------------------------------------------
@@ -51,10 +64,16 @@ def find_PAM(target):
 # Standalone test
 if __name__ == "__main__":
     test = "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #1: {find_PAM(test)}") # should find GG at index 32
+    print(f"Test #1: {find_PAM(test)}") # should find GG at index [32]
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #2: {find_PAM(test)}") # should find GG at index 40
+    print(f"Test #2: {find_PAM(test)}") # should find GG at index [40]
+
+    test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCGGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
+    print(f"Test #3: {find_PAM(test)}") # should find GG at index [32,40]
+
+    test = "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
+    print(f"Test #4: {find_PAM(test)}") # should find GG at index [36,73]
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
     print(f"Test #3: {find_PAM(test)}") # should not find any valid GG

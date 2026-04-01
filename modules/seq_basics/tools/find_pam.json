@@ -1,7 +1,7 @@
 {
   "id": "org.bioe234.function.seq.find_pam.v1",
   "name": "Finding pam index",
-  "description": "Finds the position of the pam sequence",
+  "description": "Finds the positions of the pam sequence",
   "type": "function",
   "keywords": ["pam", "GG", "sequence"],
   "date_created": "3/30/26",
@@ -17,19 +17,23 @@
 
   "outputs": [
     {
-      "type": "integer",
-      "description": "The index position of the pam sequence"
+      "type": "list",
+      "description": "The index positions of all the pam sequence"
     }
   ],
 
   "examples": [
     {
       "input":  { "seq": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "36" }
+      "output": { "result": "[36]" }
     },
     {
       "input":  { "seq": "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "40" }
+      "output": { "result": "[40]" }
+    },
+    {
+      "input":  { "seq": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": "[36,73]" }
     }
   ],
 
