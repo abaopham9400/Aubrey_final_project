@@ -28,8 +28,10 @@ def find_protospacer(target):
     """
     # Find the index of the PAM sequence using the find_PAM function
     pam_index = find_PAM(target)
+    protospacer = []
 
-    protospacer = target[pam_index-21:pam_index-1]
+    for index in pam_index:
+        protospacer.append(target[index-21:index-1])
 
     return protospacer
 
@@ -37,12 +39,16 @@ def find_protospacer(target):
 # Standalone test
 if __name__ == "__main__":
     test = "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    valid = find_protospacer(test) == "TGGCTCAGAAACCTGCCAGT"
+    valid = find_protospacer(test) == ['TGGCTCAGAAACCTGCCAGT']
     print(f"Test #1: {valid}") # varifies that it returns the correct protospacer
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    valid = find_protospacer(test) == "AGTACGATCAACCTGCCAGT"
+    valid = find_protospacer(test) == ['AGTACGATCAACCTGCCAGT']
     print(f"Test #2: {valid}") # should find 20bp behind NGG
 
+    test = "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
+    valid = find_protospacer(test) == ['TCAGAAACCTGCCAGTTTGC', 'TTGTCTTTAGTTCTCACGTT']
+    print(f"Test #3: {valid}") # test for multiple protospacers
+
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #3: {find_PAM(test)}") # should not find any valid GG
+    print(f"Test #4: {find_PAM(test)}") # should not find any valid GG

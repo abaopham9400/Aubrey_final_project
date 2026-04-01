@@ -5,7 +5,7 @@
   "type": "function",
   "keywords": ["protospacer", "pam sequence", "sequence"],
   "date_created": "3/30/26",
-  "date_last_modified": "3/30/26",
+  "date_last_modified": "4/1/26",
 
   "inputs": [
     {
@@ -17,19 +17,23 @@
 
   "outputs": [
     {
-      "type": "string",
-      "description": "The protospacer sequence, 20bp upstream of NGG"
+      "type": "list",
+      "description": "Each protospacer sequence, 20bp upstream of NGG"
     }
   ],
 
   "examples": [
     {
       "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "TGGCTCAGAAACCTGCCAGT" }
+      "output": { "result": "['TGGCTCAGAAACCTGCCAGT']" }
     },
     {
       "input":  { "target": "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "AGTACGATCAACCTGCCAGT" }
+      "output": { "result": "['AGTACGATCAACCTGCCAGT']" }
+    },
+    {
+      "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": "['TCAGAAACCTGCCAGTTTGC', 'TTGTCTTTAGTTCTCACGTT']" }
     }
   ],
 
