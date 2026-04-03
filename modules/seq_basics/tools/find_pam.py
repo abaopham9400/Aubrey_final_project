@@ -1,5 +1,5 @@
 from typing import Optional
-from validate_DNA import validate_DNA
+from modules.seq_basics.tools.validate_DNA import validate_DNA
 
 def find_pam(target):
     """

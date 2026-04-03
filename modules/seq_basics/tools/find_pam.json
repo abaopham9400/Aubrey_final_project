@@ -17,7 +17,7 @@
 
   "outputs": [
     {
-      "type": "list",
+      "type": "array",
       "description": "The index positions of all the pam sequence"
     }
   ],

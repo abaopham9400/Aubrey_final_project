@@ -17,7 +17,7 @@
 
   "outputs": [
     {
-      "type": "list",
+      "type": "array",
       "description": "Each protospacer sequence, 20bp upstream of NGG"
     }
   ],

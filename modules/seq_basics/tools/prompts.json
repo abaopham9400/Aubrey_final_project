@@ -24,6 +24,12 @@
     "notes": "A valid DNA sequence should not contain lowercase letters."
   },
   {
+    "prompt": "What index is the pam sequence in this DNA sequence 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC'?",
+    "expected_tool": "find_pam",
+    "expected_args": { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
+    "notes": "Tests the AI's ability to determine if the results from find_pam indicates a valid pam sequence."
+  },
+  {
     "prompt": "Does 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC' contain a valid pam sequence?",
     "expected_tool": "find_pam",
     "expected_args": { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
@@ -32,7 +38,13 @@
   {
     "prompt": "What's the protospacer in 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC'.",
     "expected_tool": "find_protospacer",
-    "expected_args": { "target": "TGGCTCAGAAACCTGCCAGT"},
+    "expected_args": { "target": "['TGGCTCAGAAACCTGCCAGT']"},
     "notes": "Tests the AI's ability to which function to use, and if it returns the correct output."
+  },
+  {
+    "prompt": "What's the protospacer in 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC'.",
+    "expected_tool": "find_protospacer",
+    "expected_args": { "target": "['TGGCTCAGAAACCTGCCAGT'], ['TTGTCTTTAGTTCTCACGTT']"},
+    "notes": "Tests the AI's ability to find both protospacers."
   }
 ]

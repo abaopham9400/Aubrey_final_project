@@ -1,12 +1,12 @@
 from typing import Optional
-from find_pam import find_PAM
+from modules.seq_basics.tools.find_pam import find_pam
 
 def find_protospacer(target):
     """
     Description:
         Identifies the protospacer sequence within a DNA target sequence based on the location of the PAM sequence. 
         The protospacer is a 20 base pair sequence that immediately precedes the PAM sequence ('NGG'). This function 
-        locates the PAM sequence using the `find_PAM` function and then extracts the 20 bp protospacer sequence located 
+        locates the PAM sequence using the `find_pam` function and then extracts the 20 bp protospacer sequence located 
         just before it.
 
     Inputs:
@@ -26,8 +26,8 @@ def find_protospacer(target):
             Expected Exception: ValueError
             Description: The Sequence is too short for a valid protospacer
     """
-    # Find the index of the PAM sequence using the find_PAM function
-    pam_index = find_PAM(target)
+    # Find the index of the PAM sequence using the find_pam function
+    pam_index = find_pam(target)
     protospacer = []
 
     for index in pam_index:
@@ -51,4 +51,4 @@ if __name__ == "__main__":
     print(f"Test #3: {valid}") # test for multiple protospacers
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #4: {find_PAM(test)}") # should not find any valid GG
+    print(f"Test #4: {find_pam(test)}") # should not find any valid GG
