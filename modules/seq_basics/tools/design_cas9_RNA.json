@@ -1,0 +1,48 @@
+{
+  "id": "org.bioe234.function.seq.design_cas9_RNA.v1",
+  "name": "Designs the Cas9",
+  "description": "Designs the Cas9 to be used",
+  "type": "function",
+  "keywords": ["cut", "Cas9", "enzyme"],
+  "date_created": "4/3/26",
+  "date_last_modified": "4/3/26",
+
+  "inputs": [
+    {
+      "name": "target",
+      "type": "string",
+      "description": "A DNA sequence with more than 20bp"
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "array",
+      "description": "All possible cas9 enzymes"
+    }
+  ],
+
+  "examples": [
+    {
+      "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": "['UCAGAAACCUGCCAGUUUGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC']" }
+    },
+    {
+      "input":  { "target": "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": "['AGUACGAUCAACCUGCCAGUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC']" }
+    },
+    {
+      "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": "['UCAGAAACCUGCCAGUUUGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC','UUGUCUUUAGUUCUCACGUUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC']" }
+    }
+  ],
+
+  "execution_details": {
+    "language": "Python",
+    "source": "modules/seq_basics/tools/design_cas9_RNA.py",
+    "initialization": null,
+    "execution": "design_cas9_RNA",
+    "mcp_name": "design_cas9_RNA",
+    "seq_params": ["target"]
+  }
+}

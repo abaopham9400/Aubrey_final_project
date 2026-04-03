@@ -38,13 +38,19 @@
   {
     "prompt": "What's the protospacer in 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC'.",
     "expected_tool": "find_protospacer",
-    "expected_args": { "target": "['TGGCTCAGAAACCTGCCAGT']"},
+    "expected_args": { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
     "notes": "Tests the AI's ability to which function to use, and if it returns the correct output."
   },
   {
     "prompt": "What's the protospacer in 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC'.",
     "expected_tool": "find_protospacer",
-    "expected_args": { "target": "['TGGCTCAGAAACCTGCCAGT'], ['TTGTCTTTAGTTCTCACGTT']"},
+    "expected_args": { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
     "notes": "Tests the AI's ability to find both protospacers."
+  },
+  {
+    "prompt": "Design a cas9 protein that can be used in this sequence, 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC'.",
+    "expected_tool": "design_cas9_RNA",
+    "expected_args": { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
+    "notes": "Tests the AI's ability to design the cas9_DNA"
   }
 ]
