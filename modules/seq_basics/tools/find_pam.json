@@ -5,7 +5,7 @@
   "type": "function",
   "keywords": ["pam", "GG", "sequence"],
   "date_created": "3/30/26",
-  "date_last_modified": "4/1/26",
+  "date_last_modified": "4/6/26",
 
   "inputs": [
     {
@@ -24,16 +24,16 @@
 
   "examples": [
     {
-      "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "[36]" }
+      "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
+      "output": { "result": "[(0, '-'), (1, '-'), (9, '-'), (22, '-'), (26, '-'), (36, '+')]" }
     },
     {
-      "input":  { "target": "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "[40]" }
+      "input":  { "target": "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
+      "output": { "result": "[(0, '-'), (1, '-'), (9, '-'), (30, '-'), (34, '-'), (40, '+')]" }
     },
     {
-      "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "[36,73]" }
+      "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
+      "output": { "result": "[(0, '-'), (1, '-'), (9, '-'), (22, '-'), (26, '-'), (36, '+'), (73, '+')]" }
     }
   ],
 

@@ -103,4 +103,7 @@ if __name__ == "__main__":
     print(f"Test #4: {find_pam(test)}") # finds PAM on sense strand: [36,73] and on anti-sense strand: [0,1,9,22,26]
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #5: {find_pam(test)}") # should not find any valid GG on sense strand and finds PAM on anti-sense strand: [0,1,9,30,34]
+    #print(f"Test #5: {find_pam(test)}") # should not find any valid GG on sense strand and finds PAM on anti-sense strand: [0,1,9,30,34]
+
+    test = "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
+    print(f"json: {find_pam(test)}")
