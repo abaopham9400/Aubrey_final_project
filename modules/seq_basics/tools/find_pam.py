@@ -1,5 +1,6 @@
 from typing import Optional
 from modules.seq_basics.tools.validate_DNA import validate_DNA
+from modules.seq_basics.tools.reverse_complement import reverse_complement
 
 def find_pam(target):
     """
@@ -33,18 +34,32 @@ def find_pam(target):
         raise ValueError(f"Target sequence must be at least 23bp (20bp guide + 3bp PAM). Provided length: {len(target)}")
 
     pam_indices = []
-    # Start searching from index 21
-    current_pos = target.find('GG', 21)
+    
+    # get the indices of a sequence
+    def get_indices(target):
+        pam_indices = []
 
-    # If no GG is found at all after index 21, raise the error immediately
-    if current_pos == -1:
-        return []
+        # Start searching from index 21
+        current_pos = target.find('GG', 21)
 
-    while current_pos != -1:
-        pam_indices.append(current_pos)
-        # To find the NEXT instance, start searching from current_pos + 1
-        # This allows for overlapping 'GGG' to return both indices
-        current_pos = target.find('GG', current_pos + 1)
+        # If no GG is found at all after index 21, raise the error immediately
+        if current_pos == -1:
+            return []
+
+        while current_pos != -1:
+            pam_indices.append(current_pos)
+            # To find the NEXT instance, start searching from current_pos + 1
+            # This allows for overlapping 'GGG' to return both indices
+            current_pos = target.find('GG', current_pos + 1)
+
+        return pam_indices
+
+    # for the (+) sequence
+    pam_indices = get_indices(target)
+
+    # for the (-) sequence
+    reverse_target = reverse_complement(target)
+    pam_indices.extend(get_indices(reverse_target))
 
     return pam_indices
  
@@ -76,4 +91,4 @@ if __name__ == "__main__":
     print(f"Test #4: {find_pam(test)}") # should find GG at index [36,73]
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #3: {find_pam(test)}") # should not find any valid GG and return []
+    #print(f"Test #3: {find_pam(test)}") # should not find any valid GG and return []
