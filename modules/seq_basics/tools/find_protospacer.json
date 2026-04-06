@@ -5,7 +5,7 @@
   "type": "function",
   "keywords": ["protospacer", "pam sequence", "sequence"],
   "date_created": "3/30/26",
-  "date_last_modified": "4/1/26",
+  "date_last_modified": "4/6/26",
 
   "inputs": [
     {
@@ -18,22 +18,22 @@
   "outputs": [
     {
       "type": "array",
-      "description": "Each protospacer sequence, 20bp upstream of NGG"
+      "description": "Each protospacer sequence, 20bp upstream of NGG and 20bp downstream of CCN"
     }
   ],
 
   "examples": [
     {
       "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "['TGGCTCAGAAACCTGCCAGT']" }
+      "output": { "result": "['GTTTCTGAGCCAGGCATCTA','GGTTTCTGAGCCAGGCATCT','AACTGGCAGGTTTCTGAGCC','AAAAAAACGTGCCAACTGGC', 'AAAGAAAAAAACGTGCCAAC', 'TGGCTCAGAAACCTGCCAGT']" }
     },
     {
       "input":  { "target": "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "['AGTACGATCAACCTGCCAGT']" }
+      "output": { "result": "['TACTCTGAGCCAGGCATCTA', 'GTACTCTGAGCCAGGCATCT', 'GGTTGATCGTACTCTGAGCC', 'AAAAAAACGTGCCAACTGGC', 'AAAGAAAAAAACGTGCCAAC', 'AGTACGATCAACCTGCCAGT']" }
     },
     {
       "input":  { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
-      "output": { "result": "['TCAGAAACCTGCCAGTTTGC', 'TTGTCTTTAGTTCTCACGTT']" }
+      "output": { "result": "['GTTTCTGAGCCAGGCATCTA', 'GGTTTCTGAGCCAGGCATCT', 'AACTGGCAGGTTTCTGAGCC', 'AAACGTGCCAGCAAACTGGC', 'AAAAAAACGTGCCAGCAAAC', 'TCAGAAACCTGCCAGTTTGC', 'TTGTCTTTAGTTCTCACGTT']" }
     }
   ],
 

@@ -27,13 +27,13 @@
     "prompt": "What index is the pam sequence in this DNA sequence 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC'?",
     "expected_tool": "find_pam",
     "expected_args": { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
-    "notes": "Tests the AI's ability to determine if the results from find_pam indicates a valid pam sequence."
+    "notes": "Tests the AI's ability to determine if the results from find_pam indicates a valid pam sequence from both strands."
   },
   {
     "prompt": "Does 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC' contain a valid pam sequence?",
     "expected_tool": "find_pam",
     "expected_args": { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
-    "notes": "Tests the AI's ability to determine if the results from find_pam indicates a valid pam sequence."
+    "notes": "Tests the AI's ability to determine if the results from find_pam indicates a valid pam sequence from both strands."
   },
   {
     "prompt": "What's the protospacer in 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC'.",
