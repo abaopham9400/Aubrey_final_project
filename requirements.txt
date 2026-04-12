@@ -3,4 +3,4 @@ google-genai
 python-dotenv
 biopython>=1.80
 pytest>=7.0
-Biomatters-Azimuth==2.2.0
+azimuth==2.0.0
