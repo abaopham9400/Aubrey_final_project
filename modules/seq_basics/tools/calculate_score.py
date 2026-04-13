@@ -38,8 +38,7 @@ def calculate_score(grna_list, genome_sequence):
         
         results.append({
             'gRNA': grna_long, 
-            'score': round(final_score, 2), 
-            'hits': hits
+            'score': round(final_score, 2)
         })
     
     return sorted(results, key=lambda x: x['score'], reverse=True)
@@ -52,4 +51,4 @@ if __name__ == "__main__":
     rankings = calculate_score(my_grnas, user_genome)
 
     for r in rankings:
-        print(f"gRNA: {r['gRNA']} | Score: {r['score']} | Total Hits: {r['hits']}")
+        print(f"gRNA: {r['gRNA']} | Score: {r['score']}")
