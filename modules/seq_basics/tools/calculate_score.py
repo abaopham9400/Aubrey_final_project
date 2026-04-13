@@ -26,7 +26,7 @@ def calculate_score(grna_list, genome_sequence):
         # 3. Off-target Search (PAM: NGG)
         # We use a regex lookahead to find overlapping matches
         # The pattern looks for the gRNA followed by two of any character and a G
-        pattern = re.compile(f"(?=({grna}..G))") 
+        pattern = re.compile(f"(?=({grna}.GG))") 
         
         hits = len(pattern.findall(genome_str))
         
@@ -44,11 +44,12 @@ def calculate_score(grna_list, genome_sequence):
     
     return sorted(results, key=lambda x: x['score'], reverse=True)
 
-# --- Example Usage ---
-user_genome = "ATCGATCGATCGATCGATCGGGATCGATCGATCGATCGATCGCGG" # Direct string input
-my_grnas = ["ATCGATCGATCGATCGATCG", "CCGGCCGGCCGGCCGGCCGG"]
+# Standalone test
+if __name__ == "__main__":
+    user_genome = "ATCGATCGATCGATCGATCGGGATCGATCGATCGATCGATCGCGG" # Direct string input
+    my_grnas = ["ATCGATCGATCGATCGATCG", "CCGGCCGGCCGGCCGGCCGG"]
 
-rankings = calculate_score(my_grnas, user_genome)
+    rankings = calculate_score(my_grnas, user_genome)
 
-for r in rankings:
-    print(f"gRNA: {r['gRNA']} | Score: {r['score']} | Total Hits: {r['hits']}")
+    for r in rankings:
+        print(f"gRNA: {r['gRNA']} | Score: {r['score']} | Total Hits: {r['hits']}")
