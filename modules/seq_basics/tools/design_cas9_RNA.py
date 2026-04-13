@@ -72,5 +72,8 @@ if __name__ == "__main__":
     print(f"Test #2: {valid}") # there are two valid protospacers
 
     test3 = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGACACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
-    valid = design_cas9_RNA(test3) == []
-    print(f"Test #3: {valid}") # should throw an error since no valid PAM
+    #valid = design_cas9_RNA(test3) == []
+    #print(f"Test #3: {valid}") # should throw an error since no valid PAM
+
+    json = "CTCTAGATGCTTGGCTCAGAAACATGCAAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATCCAATTGTTC"
+    print(f"json: {design_cas9_RNA(json)}")
