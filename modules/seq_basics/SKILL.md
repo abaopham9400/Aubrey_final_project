@@ -37,41 +37,58 @@ Use when the user asks for:
 
 The result is the same length as the input. Uppercase output.
 
-### `dna_translate`
-Translates a DNA coding sequence to a protein sequence using the standard genetic code.
+### `find_PAM`
+Finds the index positions and strand orientation of all 'NGG' Protospacer Adjacent Motif (PAM) sequences.
+
+Use when the user asks:
+- "Find the PAM sites in this sequence."
+- "Where can Cas9 bind?"
+- "Does this DNA contain a valid PAM?"
+- "List the NGG locations."
+
+Technical details:
+- Searches both the sense (+) and anti-sense (-) strands.
+- Only identifies PAMs located after the 23rd position to allow for a preceding 20bp guide.
+- Returns a list of tuples: (index, strand).
+
+### 'find_protospacer'
+Identifies the 20bp DNA sequences (protospacers) immediately preceding a valid PAM site.
+
+Use when the user asks:
+- "What are the protospacers in this sequence?"
+- "Find the 20bp sequences upstream of the PAM."
+- "Extract the target sequences for CRISPR."
+
+Strand behavior:
+- For the sense (+) strand, it extracts the 20bp immediately before the PAM.
+- For the anti-sense (-) strand, it extracts the 20bp region and returns its reverse complement to provide the 5'->3' sequence.
+
+### 'design_cas9_RNA'
+Designs complete single guide RNA (sgRNA) sequences by combining a protospacer with a standard gRNA scaffold.
 
 Use when the user asks to:
-- "translate", "get the protein", "what protein does this encode"
-- work with a specific reading frame (1, 2, or 3)
-- translate a specific region using `start` / `end` coordinates (0-indexed, end is exclusive)
+- "Design a gRNA for this sequence."
+- "What is the best gRNA to use for this genome?"
+- "Provide a list of possible guide RNAs and their scores."
+- "Create a CRISPR tool for this target."
 
-**Frame guidance:**
-- Frame 1 — start reading from the first base (default)
-- Frame 2 — skip 1 base, then read triplets
-- Frame 3 — skip 2 bases, then read triplets
-
-**Stop codons** appear as `*` in the output. **Unrecognised codons** appear as `X`.
-
-**Coordinate example:** "translate bases 100 to 200" → `start=100, end=200`
-"translate the first 60bp" → `start=0, end=60` (or omit start, set `end=60`)
+Output format:
+- Returns a list of dictionaries containing the gRNA string (in RNA format, using 'U' instead of 'T') and a numerical score ranking its efficacy.
+- The resulting sequence includes the 20bp protospacer followed by the scaffold: GUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAucaacuugaaaaaguGGCACCGAGUCGGUGC.
 
 ---
 
 ## Interpreting results
 
-- A protein sequence like `MSKGEEK...` starting with `M` (methionine) suggests you've
-  found the correct reading frame for a real open reading frame.
-- A sequence full of `*` stop codons or `X` unknowns usually means the wrong frame,
-  wrong coordinates, or the sequence is not a coding region.
-- When translating a full plasmid, most of the output will be non-coding — only specific
-  coordinate ranges will give meaningful protein sequence.
+- High Scores: A score of 90.0 or higher indicates a highly favorable guide. If multiple guides are returned, prioritize the one with the highest score for your experiment.
+- Empty Results: If the tool returns an empty list, it means no valid NGG PAM sites were found far enough into the sequence (at least 23bp from the start) to allow for a full 20bp guide.
+- RNA vs DNA: The output is an RNA sequence. When ordering synthetic oligos or designing primers for cloning, remember to convert these back to DNA (U → T) as required by your specific protocol.
+- Scaffold Length: The total length of the output will be 96 nucleotides (20bp protospacer + 76bp scaffold). If your result is significantly different, verify that the input sequence was long enough to identify a full protospacer.
 
 ---
 
 ## Sequence input rules (handled automatically)
 
 You never need to paste the full sequence. The framework resolves these automatically:
-- `"pBR322"` → full 4361 bp sequence
-- A raw string like `"ATGCGATCG"` → used as-is
-- A FASTA string starting with `>` → sequence extracted automatically
-- A GenBank string starting with `LOCUS` → sequence extracted automatically
+- The input requires a DNA sequence (ATCG)
+- Input must be a string that is at least 23 characters long.
