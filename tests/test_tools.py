@@ -9,8 +9,10 @@ direct imports continue to work for students who prefer that style.
 
 import pytest
 
-from modules.seq_basics.tools.find_pam import translate
 from modules.seq_basics.tools.reverse_complement import reverse_complement
+from modules.seq_basics.tools.find_pam import find_pam
+from modules.seq_basics.tools.find_protospacer import find_protospacer
+from modules.seq_basics.tools.design_cas9_RNA import design_cas9_RNA
 
 
 def test_reverse_complement_basic():
@@ -22,19 +24,39 @@ def test_reverse_complement_ambiguity_codes():
     assert reverse_complement("ATRYSWKMN")
 
 
-def test_translate_basic():
-    assert translate("ATGGCT") == "MA"
+def test_find_pam_basic():
+    assert find_pam("ATGCATCGAGTCACGTACGTACTGACTGGCGTACGT") == [(27,'+')]
 
+def test_find_pam_complex():
+    assert find_pam("AGGCCCCGAGTCACGTACGTACTGACTGGCGGACCT") == [(3,'-'),(4,'-'),(5,'-'),(27,'+'),(30,'+')]
 
-def test_translate_frame_validation():
-    with pytest.raises(ValueError):
-        translate("ATGGCT", frame=0)
-    with pytest.raises(ValueError):
-        translate("ATGGCT", frame=4)
+def test_find_protospacer_basic():
+    assert find_protospacer("ATGCATCGAGTCACGTACGTACTGACTGGCGTACGT") == ['CGAGTCACGTACGTACTGAC']
 
+def test_find_protospacer_complex():
+    assert find_protospacer("AGGCCCCGAGTCACGTACGTACTGACTGGCGGACCT") == ['GTCAGTACGTACGTGACTCG','AGTCAGTACGTACGTGACTC','CAGTCAGTACGTACGTGACT','CGAGTCACGTACGTACTGAC','GTCACGTACGTACTGACTGG']
 
-def test_translate_with_coordinates_and_frame():
-    # sequence: A ATG GCT AAA
-    # start=1 → ATGGCTAAA
-    # frame=1 → ATG GCT AAA → M A K
-    assert translate("AATGGCTAAA", start=1, end=None, frame=1) == "MAK"
+def test_find_design_cas9_RNA_basic():
+    assert design_cas9_RNA("ATGCATCGAGTCACGTACGTACTGACTGGCGTACGT")[0]['gRNA'] == 'CGAGUCACGUACGUACUGACGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC'
+
+def test_find_design_cas9_RNA_complex():
+    correct_answers = [
+        'AGUCAGUACGUACGUGACUCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC',
+        'CAGUCAGUACGUACGUGACUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC',
+        'GUCAGUACGUACGUGACUCGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC',
+        'CGAGUCACGUACGUACUGACGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC',
+        'GUCACGUACGUACUGACUGGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC']
+    results = design_cas9_RNA("AGGCCCCGAGTCACGTACGTACTGACTGGCGGACCT")
+    
+    for i in range(5):
+        assert results[i]['gRNA'] == correct_answers[i]
+
+if __name__ == "__main__":
+    test_reverse_complement_basic()
+    test_reverse_complement_ambiguity_codes()
+    test_find_pam_basic()
+    test_find_pam_complex()
+    test_find_protospacer_basic()
+    test_find_protospacer_complex()
+    test_find_design_cas9_RNA_basic()
+    test_find_design_cas9_RNA_complex()

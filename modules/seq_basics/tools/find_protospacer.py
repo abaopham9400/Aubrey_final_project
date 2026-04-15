@@ -74,7 +74,3 @@ if __name__ == "__main__":
 
     test = "ACTTAGATGCTTGGCTCAGAGTACGATCAACGTGACAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
     #print(f"Test #4: {find_protospacer(test)}") # should not find any valid GG on sense and no valid CC on anti-sense
-
-    test = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGCCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
-    valid = find_protospacer(test)
-    print(f"pam: {valid}")
