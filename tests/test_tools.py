@@ -12,6 +12,7 @@ import pytest
 from modules.seq_basics.tools.reverse_complement import reverse_complement
 from modules.seq_basics.tools.find_pam import find_pam
 from modules.seq_basics.tools.find_protospacer import find_protospacer
+from modules.seq_basics.tools.calculate_score import calculate_score
 from modules.seq_basics.tools.design_cas9_RNA import design_cas9_RNA
 
 
@@ -24,23 +25,42 @@ def test_reverse_complement_ambiguity_codes():
     assert reverse_complement("ATRYSWKMN")
 
 
+# find_pam tests
 def test_find_pam_single():
     assert find_pam("ATGCATCGAGTCACGTACGTACTGACTGGCGTACGT") == [(27,'+')]
 
 def test_find_pam_multiple():
     assert find_pam("AGGCCCCGAGTCACGTACGTACTGACTGGCGGACCT") == [(3,'-'),(4,'-'),(5,'-'),(27,'+'),(30,'+')]
 
+def test_find_pam_multi_GG():
+    assert len(find_pam("AGGCTACGAGTCACGTACGTACTGACTGGGGGACCT")) == 4
+
 def test_find_pam_invalid_sequence():
     with pytest.raises(ValueError):
         # This call should trigger the error caused by upstream of GG and CC being too short
         find_pam("ACTGGACTGGTCTAGACATGCATACCA")
 
+def test_find_pam_invalid_DNA():
+    with pytest.raises(ValueError):
+        # This call should trigger the error caused by an X in the sequence
+        find_pam("ACTGGACTGGXTCTAGACATGCATACCA")
+
+
+# find_protospacer tests
 def test_find_protospacer_single():
     assert find_protospacer("ATGCATCGAGTCACGTACGTACTGACTGGCGTACGT") == ['CGAGTCACGTACGTACTGAC']
 
 def test_find_protospacer_multiple():
     assert find_protospacer("AGGCCCCGAGTCACGTACGTACTGACTGGCGGACCT") == ['GTCAGTACGTACGTGACTCG','AGTCAGTACGTACGTGACTC','CAGTCAGTACGTACGTGACT','CGAGTCACGTACGTACTGAC','GTCACGTACGTACTGACTGG']
 
+
+# calculate_score tests
+def test_calculate_score_TTTT():
+    results = calculate_score(['ATAGCCATGCTTTTACTAAT'], "ATTAATATAGCCATGCTTTTACTAATTGGATTAGAT")
+    assert results[0]['score'] == 30.0
+
+
+# design_cas9_RNA tests
 def test_find_design_cas9_RNA_single():
     assert design_cas9_RNA("ATGCATCGAGTCACGTACGTACTGACTGGCGTACGT")[0]['gRNA'] == 'CGAGUCACGUACGUACUGACGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC'
 
@@ -56,6 +76,16 @@ def test_find_design_cas9_RNA_multiple():
     for i in range(5):
         assert results[i]['gRNA'] == correct_answers[i]
 
+def test_find_design_cas9_RNA_exactly_one():
+    target_sequence = 'CCATCGATGCTGACGTCAATCGA'
+    valid = 'UCGAUUGACGUCAGCAUCGAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC'
+    assert design_cas9_RNA(target_sequence)[0]['gRNA'] == valid
+
+def test_design_cas9_RNA_empty_input():
+    with pytest.raises(ValueError):
+        # This call should trigger the error caused by no input
+        design_cas9_RNA("")
+
 
 if __name__ == "__main__":
     test_reverse_complement_basic()
@@ -64,12 +94,19 @@ if __name__ == "__main__":
     # find_pam tests
     test_find_pam_single()
     test_find_pam_multiple()
+    test_find_pam_multi_GG()
     test_find_pam_invalid_sequence()
+    test_find_pam_invalid_DNA()
 
     # find_protospacer
     test_find_protospacer_single()
     test_find_protospacer_multiple()
 
+    # calculate_score
+    test_calculate_score_TTTT()
+
     # find design_cas9_RNA
     test_find_design_cas9_RNA_single()
     test_find_design_cas9_RNA_multiple()
+    test_find_design_cas9_RNA_exactly_one()
+    test_design_cas9_RNA_empty_input()
