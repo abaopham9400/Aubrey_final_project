@@ -24,22 +24,27 @@ def test_reverse_complement_ambiguity_codes():
     assert reverse_complement("ATRYSWKMN")
 
 
-def test_find_pam_basic():
+def test_find_pam_single():
     assert find_pam("ATGCATCGAGTCACGTACGTACTGACTGGCGTACGT") == [(27,'+')]
 
-def test_find_pam_complex():
+def test_find_pam_multiple():
     assert find_pam("AGGCCCCGAGTCACGTACGTACTGACTGGCGGACCT") == [(3,'-'),(4,'-'),(5,'-'),(27,'+'),(30,'+')]
 
-def test_find_protospacer_basic():
+def test_find_pam_invalid_sequence():
+    with pytest.raises(ValueError):
+        # This call should trigger the error caused by upstream of GG and CC being too short
+        find_pam("ACTGGACTGGTCTAGACATGCATACCA")
+
+def test_find_protospacer_single():
     assert find_protospacer("ATGCATCGAGTCACGTACGTACTGACTGGCGTACGT") == ['CGAGTCACGTACGTACTGAC']
 
-def test_find_protospacer_complex():
+def test_find_protospacer_multiple():
     assert find_protospacer("AGGCCCCGAGTCACGTACGTACTGACTGGCGGACCT") == ['GTCAGTACGTACGTGACTCG','AGTCAGTACGTACGTGACTC','CAGTCAGTACGTACGTGACT','CGAGTCACGTACGTACTGAC','GTCACGTACGTACTGACTGG']
 
-def test_find_design_cas9_RNA_basic():
+def test_find_design_cas9_RNA_single():
     assert design_cas9_RNA("ATGCATCGAGTCACGTACGTACTGACTGGCGTACGT")[0]['gRNA'] == 'CGAGUCACGUACGUACUGACGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC'
 
-def test_find_design_cas9_RNA_complex():
+def test_find_design_cas9_RNA_multiple():
     correct_answers = [
         'AGUCAGUACGUACGUGACUCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC',
         'CAGUCAGUACGUACGUGACUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC',
@@ -51,12 +56,20 @@ def test_find_design_cas9_RNA_complex():
     for i in range(5):
         assert results[i]['gRNA'] == correct_answers[i]
 
+
 if __name__ == "__main__":
     test_reverse_complement_basic()
     test_reverse_complement_ambiguity_codes()
-    test_find_pam_basic()
-    test_find_pam_complex()
-    test_find_protospacer_basic()
-    test_find_protospacer_complex()
-    test_find_design_cas9_RNA_basic()
-    test_find_design_cas9_RNA_complex()
+
+    # find_pam tests
+    test_find_pam_single()
+    test_find_pam_multiple()
+    test_find_pam_invalid_sequence()
+
+    # find_protospacer
+    test_find_protospacer_single()
+    test_find_protospacer_multiple()
+
+    # find design_cas9_RNA
+    test_find_design_cas9_RNA_single()
+    test_find_design_cas9_RNA_multiple()
