@@ -1,0 +1,58 @@
+{
+  "id": "org.bioe234.function.seq.calculate_score.v1",
+  "name": "Scoring sgRNA",
+  "description": "Ranks sgRNA based on efficiency.",
+  "type": "function",
+  "keywords": ["efficiency", "off_penalty", "GC", "Poly-T", "gRNA"],
+  "date_created": "4/20/26",
+  "date_last_modified": "4/20/26",
+
+  "inputs": [
+    {
+      "name": "grna_list",
+      "type": "array",
+      "description": "A list of various gRNA"
+    },
+    {
+      "name": "genome_sequence",
+      "type": "string",
+      "description": "A string of the raw genome"
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "array",
+      "description": "A list of all guide RNA sequences and their scores."
+    }
+  ],
+
+  "examples": [
+    {
+      "input":  { "grna_list": ["TCAGAAACATGCAAGTTTGC"],
+        "genome_sequence": "CTCTAGATGCTTGGCTCAGAAACATGCAAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTTCAGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": [{"gRNA":"UCAGAAACAUGCAAGUUUGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC", "score":90.0}] }
+    },
+    {
+      "input":  { "grna_list": ["TCAGAAACATGCAAGTTTGC", "TTTGTCATACTTGACAACGC"],
+        "target": "CTCTAGATGCTTGGCTCAGAAACATGCAAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTTCCGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC" },
+      "output": { "result": [{"gRNA":"UCAGAAACAUGCAAGUUUGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC", "score":90.0},
+                            {"gRNA":"GCGUUGUCAAGUAUGACAAAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC", "score":90}] }
+    },
+    {
+      "input":  { "grna_list": ["TCAGAAACATGCAAGTTTGC", "ACGTTTTTTTCTTTTGTCTT"],
+        "target": "CTCTAGATGCTTGGCTCAGAAACATGCAAGTTTGCTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGGCATACTTGACAACGCTTCTTTAACCAAATCCAATTGTTC" },
+      "output": { "result": [{"gRNA":"UCAGAAACAUGCAAGUUUGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC", "score":90.0},
+                            {"gRNA":"UUGUCUUUAGUUCUCACGUUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC", "score":85.0}] }
+    }
+  ],
+
+  "execution_details": {
+    "language": "Python",
+    "source": "modules/seq_basics/tools/calculate_score",
+    "initialization": null,
+    "execution": "calculate_score",
+    "mcp_name": "calculate_score",
+    "seq_params": ["grna_list", "genome_sequence"]
+  }
+}

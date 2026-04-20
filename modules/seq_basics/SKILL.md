@@ -63,6 +63,22 @@ Strand behavior:
 - For the sense (+) strand, it extracts the 20bp immediately before the PAM.
 - For the anti-sense (-) strand, it extracts the 20bp region and returns its reverse complement to provide the 5'->3' sequence.
 
+### 'calculate_score'
+Evaluates the efficacy and safety of a list of guide RNAs (sgRNAs) against a target genome sequence.
+
+Use when the user asks:
+- "Which of these gRNAs is the best?"
+- "Check these guides for off-target effects."
+- "Score these CRISPR sequences."
+- "Rank these guides by efficiency."
+
+Technical details:
+- Efficiency Score: Calculates a base score based on GC content, with an ideal target of 50%.
+- Sequence Penalties: Heavily penalizes sequences containing "TTTT" (Poly-T), which can terminate RNA polymerase III transcription.
+- Off-target Analysis: Scans the provided genome for occurrences of the 20bp protospacer followed by an 'NGG' PAM.
+- Scoring Logic: Each additional match in the genome (beyond the intended target) incurs a 30-point penalty.
+- Output: Returns a list of dictionaries containing the full gRNA sequence and its final numerical score, sorted from highest to lowest.
+
 ### 'design_cas9_RNA'
 Designs complete single guide RNA (sgRNA) sequences by combining a protospacer with a standard gRNA scaffold.
 
