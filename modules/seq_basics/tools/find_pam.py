@@ -1,6 +1,7 @@
 from typing import Optional, List, Tuple
 from modules.seq_basics.tools.validate_DNA import validate_DNA
 from modules.seq_basics.tools.reverse_complement import reverse_complement
+from modules.seq_basics.tools.get_sequence import get_sequence
 
 def find_pam(target: str) -> List[Tuple[int, str]]:
     """
@@ -33,8 +34,6 @@ def find_pam(target: str) -> List[Tuple[int, str]]:
     """
     if not validate_DNA(target):
         raise ValueError("Invalid target sequence")
-    if len(target) < 23:
-        raise ValueError(f"Target sequence must be at least 23bp (20bp guide + 3bp PAM). Provided length: {len(target)}")
 
     # Helper function to get raw indices of 'GG' for a given sequence string
     def get_indices(seq: str) -> List[int]:
@@ -49,6 +48,9 @@ def find_pam(target: str) -> List[Tuple[int, str]]:
             current_pos = seq.find('GG', current_pos + 1)
 
         return found_indices
+
+    # gets the sequence based on inputs
+    target = get_sequence(target)
 
     # 1. Find targets on the (+) sense strand
     top_indices = get_indices(target)
@@ -105,7 +107,10 @@ if __name__ == "__main__":
     print(f"Test #4: {find_pam(test)}") # finds PAM on sense strand: [36,73] and on anti-sense strand: [0,1,9,22,26]
 
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #5: {find_pam(test)}") # should not find any valid GG on sense strand and finds PAM on anti-sense strand: [0,1,9,30,34]
+    print(f"Test #5: {find_pam(test)}") # should not find any valid GG on sense strand, but finds PAM on anti-sense strand: [0,1,9,30,34]
+
+    test = "pBR322"
+    print(f"Test #6: {find_pam(test)}") # should detect all PAM in pBR322
 
     #test = "CTCTAGATGCTTGGCTCAGAGTACGATCAACATGCGAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    print(f"Test #6: {find_pam(test)}") # should throw an error
+    #print(f"Test #7: {find_pam(test)}") # should throw an error

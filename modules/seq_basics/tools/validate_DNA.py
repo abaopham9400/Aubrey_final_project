@@ -1,4 +1,6 @@
 from typing import Optional
+import os
+import re
 
 def validate_DNA(seq):
     """
@@ -39,11 +41,35 @@ def validate_DNA(seq):
     if seq is None:
         return False
 
+    # Check if every character in the string is a valid nucleotide
+    return get_sequence_from_input(seq) or valid_sequence(seq)
+
+# checks if its a valid DNA sequence
+def valid_sequence(seq):
+    if len(seq) < 23:
+        raise ValueError(f"Target sequence must be at least 23bp (20bp guide + 3bp PAM). Provided length: {len(seq)}")
+    
     # Define a set of valid nucleotides for DNA
     valid_nucleotides = {'A', 'T', 'C', 'G'}
 
-    # Check if every character in the string is a valid nucleotide
     return all(nucleotide in valid_nucleotides for nucleotide in seq)
+
+# check if input is a plasmid name
+def get_sequence_from_input(target_input):
+    # 1. Sanitize the input
+    target_input = target_input.strip()
+    
+    # 2. Define your data directory path
+    # This path goes up from 'tools/' to 'seq_basics/' then into 'data/'
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    data_dir = os.path.join(base_dir, "data")
+    
+    # 3. Check for a local file match (e.g., pBR322.gb or pBR322.fasta)
+    # We check common extensions so the user doesn't have to type them
+    for ext in [".gb", ".gbk", ".fasta", ".fa"]:
+        file_path = os.path.join(data_dir, f"{target_input}{ext}")
+        if os.path.exists(file_path):
+            return True
 
 # ---------------------------------------------------------------------------
 #Module-level alias — keeps existing tests and direct imports working.
