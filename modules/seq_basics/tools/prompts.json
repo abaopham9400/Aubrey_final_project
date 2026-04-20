@@ -36,6 +36,12 @@
     "notes": "Tests the AI's ability to determine if the results from find_pam indicates a valid pam sequence from both strands."
   },
   {
+    "prompt": "Does 'pBR322' contain a valid pam sequence?",
+    "expected_tool": "find_pam",
+    "expected_args": { "target": "pBR322"},
+    "notes": "Tests the AI's ability to differentiate a raw sequence vs a plasmid name."
+  },
+  {
     "prompt": "What's the protospacer in 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC'.",
     "expected_tool": "find_protospacer",
     "expected_args": { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"},
