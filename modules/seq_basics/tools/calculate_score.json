@@ -52,7 +52,6 @@
     "source": "modules/seq_basics/tools/calculate_score",
     "initialization": null,
     "execution": "calculate_score",
-    "mcp_name": "calculate_score",
-    "seq_params": ["grna_list", "genome_sequence"]
+    "mcp_name": "calculate_score"
   }
 }
