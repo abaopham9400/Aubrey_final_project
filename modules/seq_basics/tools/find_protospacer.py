@@ -1,6 +1,7 @@
 from typing import Optional
 from modules.seq_basics.tools.find_pam import find_pam
 from modules.seq_basics.tools.reverse_complement import reverse_complement
+from modules.seq_basics.tools.get_sequence import get_sequence
 
 def find_protospacer(target):
     """
@@ -37,15 +38,16 @@ def find_protospacer(target):
     """
     # Find the index of the PAM sequence using the find_pam function
     pam_index = find_pam(target)
+    seq = get_sequence(target)
     protospacer = []
 
     for pam in pam_index:
         index, strand = pam
         if strand == '+':
-            top_strand_slice = target[index-21:index-1]
+            top_strand_slice = seq[index-21:index-1]
             protospacer.append(top_strand_slice)
         else:
-            top_strand_slice = target[index+3:index+23]
+            top_strand_slice = seq[index+3:index+23]
             protospacer.append(reverse_complement(top_strand_slice)) # protospacer is no the anti-sense strand
 
     if len(protospacer) == 0:
@@ -72,5 +74,6 @@ if __name__ == "__main__":
                                        'TTGTCTTTAGTTCTCACGTT']
     print(f"Test #3: {valid}") # test for multiple protospacers
 
-    test = "ACTTAGATGCTTGGCTCAGAGTACGATCAACGTGACAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    #print(f"Test #4: {find_protospacer(test)}") # should not find any valid GG on sense and no valid CC on anti-sense
+    test = "pBR322"
+    valid = find_protospacer(test)
+    print(f"Test #4: {valid}") # test on plasmid name

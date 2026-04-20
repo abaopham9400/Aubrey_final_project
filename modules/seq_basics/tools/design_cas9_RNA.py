@@ -1,6 +1,7 @@
 from typing import Optional
 from modules.seq_basics.tools.find_protospacer import find_protospacer
 from modules.seq_basics.tools.calculate_score import calculate_score
+from modules.seq_basics.tools.get_sequence import get_sequence
 
 class Design_Cas9_RNA:
     """
@@ -31,7 +32,8 @@ class Design_Cas9_RNA:
         self.trcrRNA = 'GTTTTAGAGCTAGAAATAGCAAGTTAAAATAAGGCTAGTCCGTTATCAACTTGAAAAAGTGGCACCGAGTCGGTGC'
 
     def run(self, target):
-        protospacer = find_protospacer(target)
+        seq = get_sequence(target)
+        protospacer = find_protospacer(seq)
 
         cas9_DNA = []
         for proto in protospacer:
@@ -42,7 +44,7 @@ class Design_Cas9_RNA:
         cas9_RNA = [dna.replace('T', 'U') for dna in cas9_DNA]
 
         # ranks each gRNA
-        cas9_RNA_ranked = calculate_score(cas9_RNA, target)
+        cas9_RNA_ranked = calculate_score(cas9_RNA, seq)
 
         # Return the full Cas9 guide sequence
         return cas9_RNA_ranked
@@ -62,23 +64,27 @@ design_cas9_RNA = _instance.run   # callable: find_pam(target) -> int
  
 # Standalone test
 if __name__ == "__main__":
-    test1 = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
-    valid = design_cas9_RNA(test1)[0]['gRNA'] == 'UGGCUCAGAAACAUGCGAGUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC'
+    test = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
+    valid = design_cas9_RNA(test)[0]['gRNA'] == 'UGGCUCAGAAACAUGCGAGUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC'
     print(f"Test #1: {valid}") # should find protospacer with PAM at index 32 and add the trcrRNA
 
-    test2 = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGCCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
-    valid = (design_cas9_RNA(test2)[0]['gRNA'] == 'UGGCUCAGAAACAUGCGAGUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC' and
-            design_cas9_RNA(test2)[1]['gRNA'] == 'UAAAGAAGCGUUGUCAAGUAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC')
+    test = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGCCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
+    valid = (design_cas9_RNA(test)[0]['gRNA'] == 'UGGCUCAGAAACAUGCGAGUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC' and
+            design_cas9_RNA(test)[1]['gRNA'] == 'UAAAGAAGCGUUGUCAAGUAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC')
     print(f"Test #2: {valid}") # there are two valid protospacers
 
-    test3 = "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGCCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTCACAGTACGTTAGCAGTCTGGATGTACACG"
-    valid = design_cas9_RNA(test3)
+    test = "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGCCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTCACAGTACGTTAGCAGTCTGGATGTACACG"
+    valid = design_cas9_RNA(test)
     print(f"Test #3: {valid}") # tests for many valid gRNA
 
-    test4 = "CCGTAGATGCCTAGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGCCTTTGGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGGTCACAGTACGTTAGCAGTCTGGATGTACACG" * 1000
-    valid = design_cas9_RNA(test4)
+    test = "CCGTAGATGCCTAGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGCCTTTGGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGGTCACAGTACGTTAGCAGTCTGGATGTACACG" * 1000
+    valid = design_cas9_RNA(test)
     print(f"Test #4: {len(valid)} gRNA") # tests on large genomes
 
-    test5 = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGACACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
-    #valid = design_cas9_RNA(test5) == []
-    #print(f"Test #5: {valid}") # should throw an error since no valid PAM
+    test = "pBR322"
+    valid = design_cas9_RNA(test)
+    print(f"Test #5: {len(valid)} gRNA") # tests on plasmid name
+
+    #test = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGACACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
+    #valid = design_cas9_RNA(test) == []
+    #print(f"Test #6: {valid}") # should throw an error since no valid PAM

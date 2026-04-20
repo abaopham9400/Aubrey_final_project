@@ -14,7 +14,7 @@ def get_sequence(seq_name):
             # Clean out numbers and whitespace
             raw_seq = sequence_match.group(1)
             clean_seq = "".join(re.findall(r'[atgc]+', raw_seq.lower()))
-            return clean_seq
+            return clean_seq.upper()
         
 if __name__ == "__main__":
     seq = get_sequence("pBR322")
