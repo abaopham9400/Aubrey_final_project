@@ -1,0 +1,118 @@
+LOCUS       AB384297                2360 bp    DNA     linear   SYN 26-JUL-2016
+DEFINITION  Synthetic construct DNA, clone: pF1KSDA1809, Homo sapiens BCL11A
+            gene for B-cell lymphoma/leukemia 11A, complete cds, without stop
+            codon, in Flexi system.
+ACCESSION   AB384297
+VERSION     AB384297.1
+KEYWORDS    Flexi cloning system; full-length ORF without stop codon.
+SOURCE      synthetic construct
+  ORGANISM  synthetic construct
+            other sequences; artificial sequences.
+REFERENCE   1
+  AUTHORS   Nagase,T., Yamakawa,H., Tadokoro,S., Nakajima,D., Inoue,S.,
+            Yamaguchi,K., Itokawa,Y., Kikuno,R.F., Koga,H. and Ohara,O.
+  TITLE     Exploration of human ORFeome: high-throughput preparation of ORF
+            clones and efficient characterization of their protein products
+  JOURNAL   DNA Res. 15 (3), 137-149 (2008)
+   PUBMED   18316326
+REFERENCE   2  (bases 1 to 2360)
+  AUTHORS   Nagase,T., Yamakawa,H., Kikuno,R.F. and Ohara,O.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-FEB-2008) Contact:Takahiro Nagase Kazusa DNA Research
+            Institute, Huamn Genome Research; Kazusa-Kamatari 2-6-7, Kisarazu,
+            Chiba 292-0818, Japan
+COMMENT     This clone is part of the Kazusa ORFeome Project. The ORF sequence
+            was derived from a pENT clone, which was constructed by the ORF
+            trap cloning method based on a homologous recombination in E. coli
+            using a cloned cDNA (DNA Res. 12, 257-267, 2005) and subcloned into
+            a pF1K-based vector using restriction enzymes.
+            Please visit our website.
+            URL: http://www.kazusa.or.jp/kop.
+FEATURES             Location/Qualifiers
+     source          1..2360
+                     /organism="synthetic construct"
+                     /mol_type="other DNA"
+                     /db_xref="taxon:32630"
+                     /clone="pF1KSDA1809"
+                     /focus
+                     /note="vector: pF1K"
+     source          28..2346
+                     /organism="Homo sapiens"
+                     /mol_type="other DNA"
+                     /db_xref="taxon:9606"
+     misc_feature    1..27
+                     /note="linker at the 5' end of the ORF including Sgf I
+                     site and ribosome-binding sequence"
+     gene            28..>2346
+                     /gene="BCL11A"
+     CDS             28..>2346
+                     /gene="BCL11A"
+                     /note="3' linker sequence including a Pme I site
+                     (TACGTAGTTTAAAC) is attached at the 3' end of the ORF
+                     instead of the stop codon. The resultant ORF encodes
+                     Tyr-Val-Val-stop in place of stop. By cutting the ORF
+                     using Pme I, the stop codon arising in the Pme I site can
+                     be omitted."
+                     /codon_start=1
+                     /transl_table=11
+                     /product="B-cell lymphoma/leukemia 11A"
+                     /protein_id="BAG10153.1"
+                     /translation="MSRRKQGKPQHLSKREFSPEPLEAILTDDEPDHGPLGAPEGDHD
+                     LLTCGQCQMNFPLGDILIFIEHKRKQCNGSLCLEKAVDKPPSPSPIEMKKASNPVEVG
+                     IQVTPEDDDCLSTSSRGICPKQEHIADKLLHWRGLSSPRSAHGALIPTPGMSAEYAPQ
+                     GICKDEPSSYTCTTCKQPFTSAWFLLQHAQNTHGLRIYLESEHGSPLTPRVGIPSGLG
+                     AECPSQPPLHGIHIADNNPFNLLRIPGSVSREASGLAEGRFPPTPPLFSPPPRHHLDP
+                     HRIERLGAEEMALATHHPSAFDRVLRLNPMAMEPPAMDFSRRLRELAGNTSSPPLSPG
+                     RPSPMQRLLQPFQPGSKPPFLATPPLPPLQSAPPPSQPPVKSKSCEFCGKTFKFQSNL
+                     VVHRRSHTGEKPYKCNLCDHACTQASKLKRHMKTHMHKSSPMTVKSDDGLSTASSPEP
+                     GTSDLVGSASSALKSVVAKFKSENDPNLIPENGDEEEEEDDEEEEEEEEEEEEELTES
+                     ERVDYGFGLSLEAARHHENSSRGAVVGVGDESRALPDVMQGMVLSSMQHFSEAFHQVL
+                     GEKHKRGHLAEAEGHRDTCDEDSVAGESDRIDDGTVNGRGCSPGESASGGLSKKLLLG
+                     SPSSLSPFSKRIKLEKEFDLPPAAMPNTENVYSQWLAGYAASRQLKDPFLSFGDSRQS
+                     PFASSSEHSSENGSLRFSTPPGELDGGISGRSGTGSGGSTPHISGPGPGRPSSKEGRR
+                     SDTCSSHTPIRRSTQRAQDVWQFSDGSSRALKF"
+     misc_feature    2347..2360
+                     /note="linker at the 3' end of the ORF including Pme I
+                     site"
+ORIGIN      
+        1 gcgatcgctt tcgaaggaga tagaaccatg tctcgccgca agcaaggcaa accccagcac
+       61 ttaagcaaac gggaattctc gcccgagcct cttgaagcca ttcttacaga tgatgaacca
+      121 gaccacggcc cgttgggagc tccagaaggg gatcatgacc tcctcacctg tgggcagtgc
+      181 cagatgaact tcccattggg ggacattctt atttttatcg agcacaaacg gaaacaatgc
+      241 aatggcagcc tctgcttaga aaaagctgtg gataagccac cttccccttc accaatcgag
+      301 atgaaaaaag catccaatcc cgtggaggtt ggcatccagg tcacgccaga ggatgacgat
+      361 tgtttatcaa cgtcatctag aggaatttgc cccaaacagg aacacatagc agataaactt
+      421 ctgcactgga ggggcctctc ctcccctcgt tctgcacatg gagctctaat ccccacgcct
+      481 gggatgagtg cagaatatgc cccgcagggt atttgtaaag atgagcccag cagctacaca
+      541 tgtacaactt gcaaacagcc attcaccagt gcatggtttc tcttgcaaca cgcacagaac
+      601 actcatggat taagaatcta cttagaaagc gaacacggaa gtcccctgac cccgcgggtt
+      661 ggtatccctt caggactagg tgcagaatgt ccttcccagc cacctctcca tgggattcat
+      721 attgcagaca ataacccctt taacctgcta agaataccag gatcagtatc gagagaggct
+      781 tccggcctgg cagaagggcg ctttccaccc actccccccc tgtttagtcc accaccgaga
+      841 catcacttgg acccccaccg catagagcgc ctgggggcgg aagagatggc cctggccacc
+      901 catcacccga gtgcctttga cagggtgctg cggttgaatc caatggctat ggagcctccc
+      961 gccatggatt tctctaggag acttagagag ctggcaggga acacgtctag cccaccgctg
+     1021 tccccaggcc ggcccagccc tatgcaaagg ttactgcaac cattccagcc aggtagcaag
+     1081 ccgcccttcc tggcgacgcc ccccctccct cctctgcaat ccgcccctcc tccctcccag
+     1141 cccccggtca agtccaagtc atgcgagttc tgcggcaaga cgttcaaatt tcagagcaac
+     1201 ctggtggtgc accggcgcag ccacacgggc gagaagccct acaagtgcaa cctgtgcgac
+     1261 cacgcgtgca cccaggccag caagctgaag cgccacatga agacgcacat gcacaaatcg
+     1321 tcccccatga cggtcaagtc cgacgacggt ctctccaccg ccagctcccc ggaacccggc
+     1381 accagcgact tggtgggcag cgccagcagc gcgctcaagt ccgtggtggc caagttcaag
+     1441 agcgagaacg accccaacct gatcccggag aacggggacg aggaggaaga ggaggacgac
+     1501 gaggaagagg aagaagagga ggaagaggag gaggaggagc tgacggagag cgagagggtg
+     1561 gactacggct tcgggctgag cctggaggcg gcgcgccacc acgagaacag ctcgcggggc
+     1621 gcggtcgtgg gcgtgggcga cgagagccgc gccctgcccg acgtcatgca gggcatggtg
+     1681 ctcagctcca tgcagcactt cagcgaggcc ttccaccagg tcctgggcga gaagcataag
+     1741 cgcggccacc tggccgaggc cgagggccac agggacactt gcgacgaaga ctcggtggcc
+     1801 ggcgagtcgg accgcataga cgatggcact gttaatggcc gcggctgctc cccgggcgag
+     1861 tcggcctcgg ggggcctgtc caaaaagctg ctgctgggca gccccagctc gctgagcccc
+     1921 ttctctaagc gcatcaagct cgagaaggag ttcgacctgc ccccggccgc gatgcccaac
+     1981 acggagaacg tgtactcgca gtggctcgcc ggctacgcgg cctccaggca gctcaaagat
+     2041 cccttcctta gcttcggaga ctccagacaa tcgccttttg cctcctcgtc ggagcactcc
+     2101 tcggagaacg ggagcttgcg cttctccaca ccgcccgggg agctggacgg agggatctcg
+     2161 gggcgcagcg gcacgggaag tggagggagc acgccccata ttagtggtcc gggcccgggc
+     2221 aggcccagct caaaagaggg cagacgcagc gacacttgtt cttcacacac ccccattcgg
+     2281 cgtagtaccc agagagctca agatgtgtgg cagttttcgg atggaagctc gagagccctt
+     2341 aagttctacg tagtttaaac
+//

@@ -71,6 +71,10 @@ def test_calculate_score_bad_gRNA():
     results = calculate_score(['ATAATATTTTATATAATTAT'], "ATTAATATAATTATATATATAATTATTGGATTAGAT")
     assert results[0]['score'] == 0.0
 
+def test_calculate_score_duplicated_gRNA():
+    results = calculate_score(['ATCGAGTCAGCTACTGACTGAGG'], "ATCGAGTCAGCTACTGACTGAGGATCGAGTCAGCTACTGACTGAGG")
+    assert results[0]['score'] == 70.0
+
 
 # design_cas9_RNA tests
 def test_find_design_cas9_RNA_single():
@@ -123,6 +127,7 @@ if __name__ == "__main__":
     test_calculate_score_TTTT()
     test_calculate_score_no_GC()
     test_calculate_score_bad_gRNA()
+    test_calculate_score_duplicated_gRNA()
 
     # find design_cas9_RNA
     test_find_design_cas9_RNA_single()

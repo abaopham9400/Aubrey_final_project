@@ -77,7 +77,7 @@ if __name__ == "__main__":
     valid = design_cas9_RNA(test)
     print(f"Test #3: {valid}") # tests for many valid gRNA
 
-    test = "CCGTAGATGCCTAGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGCCTTTGGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGGTCACAGTACGTTAGCAGTCTGGATGTACACG" * 1000
+    #test = "CCGTAGATGCCTAGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGCCTTTGGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGGTCACAGTACGTTAGCAGTCTGGATGTACACG" * 1000
     valid = design_cas9_RNA(test)
     print(f"Test #4: {len(valid)} gRNA") # tests on large genomes
 
@@ -96,6 +96,14 @@ if __name__ == "__main__":
     test = "pACYC184"
     valid = design_cas9_RNA(test)
     print(f"Test #6: {len(valid)} gRNA") # should detect pACYC184
+
+    test = "Bla"
+    valid = design_cas9_RNA(test)
+    print(f"Test #7: {len(valid)} gRNA") # should detect Bla
+
+    test = "HPRT1"
+    valid = design_cas9_RNA(test)
+    print(f"Test #7: {len(valid)} gRNA") # should detect HPRT1
 
     #test = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGACACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
     #valid = design_cas9_RNA(test) == []

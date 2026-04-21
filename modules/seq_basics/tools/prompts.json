@@ -106,5 +106,11 @@
     "expected_tool": "design_cas9_RNA",
     "expected_args": { "target": "pACYC184"},
     "notes": "Tests the AI's ability to use plasmid names"
+  },
+  {
+    "prompt": "I am designing a CRISPR-Cas9 experiment using the pBR322 plasmid. My goal is to knock out the Ampicillin resistance gene (Bla gene) to use it as a selection marker.",
+    "expected_tool": "design_cas9_RNA",
+    "expected_args": { "target": "Bla"},
+    "notes": "Tests the AI's ability comprehend what gene the user wants to knock out"
   }
 ]
