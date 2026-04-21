@@ -78,9 +78,33 @@
     "notes": "Tests the AI's ability to determine the number of cas9_RNA"
   },
   {
+    "prompt": "If I wanted to do a CRISPR experiment on, 'CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGCCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTCACAGTACGTTAGCAGTCTGGATGTACACG' what is the best gRNA?",
+    "expected_tool": "design_cas9_RNA",
+    "expected_args": { "target": "CCCTAGATGCCTGGCTCAGAAACCTGCCAGTTTGCTGGCACGTTTTTTTCTTTTGCCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTCACAGTACGTTAGCAGTCTGGATGTACACG"},
+    "notes": "Tests the AI's ability to determine different kinds of questions"
+  },
+  {
     "prompt": "What is the best gRNA to use for 'pBR322' in a CRISPR experiment?",
     "expected_tool": "design_cas9_RNA",
     "expected_args": { "target": "pBR322"},
+    "notes": "Tests the AI's ability to use plasmid names"
+  },
+  {
+    "prompt": "What is the best gRNA to use for 'pHW001' in a CRISPR experiment?",
+    "expected_tool": "design_cas9_RNA",
+    "expected_args": { "target": "pHW001"},
+    "notes": "Tests the AI's ability to use plasmid names"
+  },
+  {
+    "prompt": "What is the best gRNA to use for 'pGEM-3Z' in a CRISPR experiment?",
+    "expected_tool": "design_cas9_RNA",
+    "expected_args": { "target": "pGEM-3Z"},
+    "notes": "Tests the AI's ability to use plasmid names"
+  },
+  {
+    "prompt": "What is the best gRNA to use for 'pACYC184' in a CRISPR experiment?",
+    "expected_tool": "design_cas9_RNA",
+    "expected_args": { "target": "pACYC184"},
     "notes": "Tests the AI's ability to use plasmid names"
   }
 ]

@@ -56,8 +56,20 @@ def test_find_protospacer_multiple():
 
 # calculate_score tests
 def test_calculate_score_TTTT():
-    results = calculate_score(['ATAGCCATGCTTTTACTAAT'], "ATTAATATAGCCATGCTTTTACTAATTGGATTAGAT")
-    assert results[0]['score'] == 30.0
+    results = calculate_score(['GCGCGCGCGCTTTTAATAAT'], "ATTAATATAGCCATGCTTTTACTAATTGGATTAGAT")
+    assert results[0]['score'] == 50.0
+
+def test_calculate_score_no_GC():
+    results = calculate_score(['ATAATTATATATATAATTAT'], "ATTAATATAATTATATATATAATTATTGGATTAGAT")
+    assert results[0]['score'] == 50.0
+
+def test_calculate_score_best_gRNA():
+    results = calculate_score(['GCGCGCGCGCATATAATTAT'], "ATTAATGCGCGCGCGCATATAATTATTGGATTAGAT")
+    assert results[0]['score'] == 100.0
+
+def test_calculate_score_bad_gRNA():
+    results = calculate_score(['ATAATATTTTATATAATTAT'], "ATTAATATAATTATATATATAATTATTGGATTAGAT")
+    assert results[0]['score'] == 0.0
 
 
 # design_cas9_RNA tests
@@ -80,6 +92,11 @@ def test_find_design_cas9_RNA_exactly_one():
     target_sequence = 'CCATCGATGCTGACGTCAATCGA'
     valid = 'UCGAUUGACGUCAGCAUCGAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC'
     assert design_cas9_RNA(target_sequence)[0]['gRNA'] == valid
+
+def test_find_design_cas9_RNA_plasmid_name():
+    plasmid_name = 'pBR322'
+    result = design_cas9_RNA(plasmid_name)
+    assert isinstance(result[0]['gRNA'], str)
 
 def test_design_cas9_RNA_empty_input():
     with pytest.raises(ValueError):
@@ -104,9 +121,12 @@ if __name__ == "__main__":
 
     # calculate_score
     test_calculate_score_TTTT()
+    test_calculate_score_no_GC()
+    test_calculate_score_bad_gRNA()
 
     # find design_cas9_RNA
     test_find_design_cas9_RNA_single()
     test_find_design_cas9_RNA_multiple()
     test_find_design_cas9_RNA_exactly_one()
+    test_find_design_cas9_RNA_plasmid_name()
     test_design_cas9_RNA_empty_input()

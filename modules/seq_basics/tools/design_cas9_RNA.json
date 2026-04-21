@@ -3,7 +3,7 @@
   "name": "Designs the Cas9 sgRNA",
   "description": "Designs the single guide RNA (sgRNA) for SpCas9 targeting.",
   "type": "function",
-  "keywords": ["cut", "Cas9", "gRNA", "CRISPR", "plasmid"],
+  "keywords": ["cut", "Cas9", "gRNA", "CRISPR", "plasmid", "experiment"],
   "date_created": "4/3/26",
   "date_last_modified": "4/13/26",
 
