@@ -112,5 +112,11 @@
     "expected_tool": "design_cas9_RNA",
     "expected_args": { "target": "Bla"},
     "notes": "Tests the AI's ability comprehend what gene the user wants to knock out"
+  },
+  {
+    "prompt": "I am conducting a CRISPR-Cas9 knockout of the human TP53 gene. What would be the best gRNA for the job?",
+    "expected_tool": "design_cas9_RNA",
+    "expected_args": { "target": "TP53"},
+    "notes": "Tests the AI's ability comprehend what gene the user wants to knock out"
   }
 ]
