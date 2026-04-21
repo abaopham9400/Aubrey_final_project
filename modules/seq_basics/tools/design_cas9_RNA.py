@@ -85,6 +85,18 @@ if __name__ == "__main__":
     valid = design_cas9_RNA(test)
     print(f"Test #5: {len(valid)} gRNA") # tests on plasmid name
 
+    test = "pHW001"
+    valid = design_cas9_RNA(test)
+    print(f"Test #6: {len(valid)} gRNA") # should detect pHW001
+
+    test = "pGEM-3Z"
+    valid = design_cas9_RNA(test)
+    print(f"Test #6: {len(valid)} gRNA") # should detect pGEM-3Z
+
+    test = "pACYC184"
+    valid = design_cas9_RNA(test)
+    print(f"Test #6: {len(valid)} gRNA") # should detect pACYC184
+
     #test = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGACACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
     #valid = design_cas9_RNA(test) == []
-    #print(f"Test #6: {valid}") # should throw an error since no valid PAM
+    #print(f"Test #8: {valid}") # should throw an error since no valid PAM

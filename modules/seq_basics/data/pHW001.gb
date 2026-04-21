@@ -1,0 +1,165 @@
+LOCUS       DQ457004                4664 bp    DNA     circular SYN 16-APR-2006
+DEFINITION  Conjugative vector pHW001, complete sequence.
+ACCESSION   DQ457004
+VERSION     DQ457004.1
+KEYWORDS    .
+SOURCE      Conjugative vector pHW001
+  ORGANISM  Conjugative vector pHW001
+            other sequences; artificial sequences; vectors.
+REFERENCE   1  (bases 1 to 4664)
+  AUTHORS   Yang,H. and Yang,Z.
+  TITLE     A novel way overcoming blunt-ligation in the construction of
+            Streptomyces conjugative vector pHW001
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 4664)
+  AUTHORS   Yang,H. and Yang,Z.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (21-MAR-2006) Life Science and Technology Department,
+            Biochemistry, Huazhong Agricultural University, 1 Shizishan Street,
+            Wuhan, Hubei Province 430070, China
+FEATURES             Location/Qualifiers
+     source          1..4664
+                     /organism="Conjugative vector pHW001"
+                     /mol_type="other DNA"
+                     /db_xref="taxon:380046"
+                     /lab_host="Streptomyces"
+                     /focus
+     source          1..455
+                     /organism="Cloning vector pUC18"
+                     /mol_type="other DNA"
+                     /db_xref="taxon:72227"
+     source          2334..4664
+                     /organism="Cloning vector pUC18"
+                     /mol_type="other DNA"
+                     /db_xref="taxon:72227"
+     misc_feature    complement(149..454)
+                     /note="lacZa"
+     misc_feature    399..455
+                     /note="multiple cloning site"
+     oriT            complement(608..719)
+                     /note="RP4 from pHZ132"
+     gene            complement(1407..2400)
+                     /gene="tsr"
+                     /note="derived from pHZ132"
+     CDS             complement(1407..2216)
+                     /gene="tsr"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="thiostrepton resistance"
+                     /protein_id="ABE60866.1"
+                     /translation="MTELDTIANPSDPAVQRIIDVTKPSRSNIKTTLIEDVEPLMHSI
+                     AAGVEFIEVYGSDSSPFPSELLDLCGRQNIPVRLIDSSIVNQLFKGERKAKTFGIARV
+                     PRPARFGDIASRRGDVVVLDGVKIVGNIGAIVRTSLALGASGIILVDSDITSIADRRL
+                     QRASRGYVFSLPVVLSGREEAIAFIRDSGMQLMTLKADGDISVKELGDNPDRLALLFG
+                     SEKGGPSDLFEEASSASVSIPMMSQTESLNVSVSLGIALHERIDRNLAANR"
+     regulatory      complement(2267..2272)
+                     /regulatory_class="minus_10_signal"
+                     /gene="tsr"
+                     /note="tandem promoter tsrp1"
+     regulatory      complement(2395..2400)
+                     /regulatory_class="minus_10_signal"
+                     /gene="tsr"
+                     /note="tandem promoter tsrp2"
+     regulatory      complement(2486..2573)
+                     /regulatory_class="promoter"
+                     /note="lac promoter"
+     rep_origin      2845
+                     /note="pUC18 Ori; RNaseH cleavage point"
+     gene            complement(3604..4505)
+                     /gene="bla"
+     CDS             complement(3604..4464)
+                     /gene="bla"
+                     /note="ampicillin resistance gene"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="beta-lactmase"
+                     /protein_id="ABE60867.1"
+                     /translation="MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGY
+                     IELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRIDAGQEQLGRRIHYSQNDLVE
+                     YSPVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRL
+                     DRWEPELNEAIPNDERDTTMPVAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPL
+                     LRSALPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIA
+                     EIGASLIKHW"
+     regulatory      complement(4499..4505)
+                     /regulatory_class="promoter"
+                     /gene="bla"
+ORIGIN      
+        1 tcgcgcgttt cggtgatgac ggtgaaaacc tctgacacat gcagctcccg gagacggtca
+       61 cagcttgtct gtaagcggat gccgggagca gacaagcccg tcagggcgcg tcagcgggtg
+      121 ttggcgggtg tcggggctgg cttaactatg cggcatcaga gcagattgta ctgagagtgc
+      181 accatatgcg gtgtgaaata ccgcacagat gcgtaaggag aaaataccgc atcaggcgcc
+      241 attcgccatt caggctgcgc aactgttggg aagggcgatc ggtgcgggcc tcttcgctat
+      301 tacgccagct ggcgaaaggg ggatgtgctg caaggcgatt aagttgggta acgccagggt
+      361 tttcccagtc acgacgttgt aaaacgacgg ccagtgccaa gcttgcatgc ctgcaggtcg
+      421 actctagagg atccccgggt accgagctcg aattcccaat gcaggtcgac ggatcttttc
+      481 cgctgcataa ccctgcttcg gggtcattat agcgattttt tcggtatatc catccttttt
+      541 cgcacgatat acaggatttt gccaaagggt tcgtgtagac tttccttggt gtatccaacg
+      601 gcgtcagccg ggcaggatag gtgaagtagg cccacccgcg agcgggtgtt ccttcttcac
+      661 tgtcccttat tcgcacctgg cggtgctcaa cgggaatcct gctctgcgag gctggccggc
+      721 taccgccggc gtaacagatg agggcaagcg gatggctgat gaaaccaagc caaccaggaa
+      781 gggcagccca cctatcaagg tgtactgcct tccagacgaa cgaagagcga ttgaggaaaa
+      841 ggcggcggcg gccggcatga gcctgtcggc ctacctgctg gccgtcggcc agggctacaa
+      901 aatcacgggc gtcgtggact atgagcacgt ccgcgagctg gcccgcatca atggcgacct
+      961 gggccgcctg ggcggcctgc tgaaactctg gctcaccgac gacccgcgca cggcgcggtt
+     1021 cggtgatgcc acgatcctcg ccctgctggc gaagatcgaa gagaagcagg acgagcttgg
+     1081 caaggtcatg atgggcgtgg tccgcccgag ggcagagcca tgactttttt agccgctaaa
+     1141 acggccgggg ggtgcgcgtg attgccaagc acgtccccat gcgctccatc aagaagagcg
+     1201 acttcgcgga gctggtgaag tacatcaccg acgagcaagg caagaccgat ccccggggac
+     1261 ctgcattggc aattcccaac atgctgcgcc ggttcggggg cggcgagccc gggaggccaa
+     1321 tcccgggctc gtgccatttc tgggtcctgt tgatcatcac tgacgaatcg aggtcgagca
+     1381 accgagcgtc cgaggaacag aggcgcttat cggttggccg cgagattcct gtcgatcctc
+     1441 tcgtgcagcg cgattccgag ggaaacggaa acgttgagag actcggtctg gctcatcatg
+     1501 gggatggaaa ccgaggcgga agacgcctcc tcgaacaggt cggaaggccc acccttttcg
+     1561 ctgccgaaca gcaaggccag ccgatccgga ttgtccccga gttccttcac ggaaatgtcg
+     1621 ccatccgcct tgagcgtcat cagctgcata ccgctgtccc gaatgaaggc gatggcctcc
+     1681 tcgcgaccgg agagaacgac gggaagggag aagacgtaac ctcggctggc cctttggaga
+     1741 cgccggtccg cgatgctggt gatgtcactg tcgaccagga tgatccccga cgctccgagc
+     1801 gcgagcgacg tgcgtactat cgcgccgatg ttcccgacga tcttcacccc gtcgagaacg
+     1861 acgacgtccc cacgccggct cgcgatatcg ccgaacctgg ccgggcgagg gacgcgggcg
+     1921 atgccgaatg tcttggcctt ccgctccccc ttgaacaact ggttgacgat cgaggagtcg
+     1981 atgaggcgga ccggtatgtt ctgccgcccg cacagatcca gcaactcaga tggaaaagga
+     2041 ctgctgtcgc tgccgtagac ctcgatgaac tccaccccgg ccgcgatgct gtgcatgagg
+     2101 ggctcgacgt cctcgatcaa cgttgtcttt atgttggatc gcgacggctt ggtgacatcg
+     2161 atgatccgct gcaccgcggg atcggacgga tttgcgatgg tgtccaactc agtcatggtc
+     2221 gtcctaccgg ctgctgtgtt cagtgacgcg attcctgggg tgtgacaccc tacgcgacga
+     2281 tggcggatgg ctgccctgac cggcaatcac caacgcaagg ggaagtcgtc gctctctggc
+     2341 aaagctcccc gctcttcccc gtccgggacc cgcgcggtcg atccccgcat atgaagtatt
+     2401 cgccttgatc ttcgcgtaga gctttggcaa ttcgtaatca tggtcatagc tgtttcctgt
+     2461 gtgaaattgt tatccgctca caattccaca caacatacga gccggaagca taaagtgtaa
+     2521 agcctggggt gcctaatgag tgagctaact cacattaatt gcgttgcgct cactgcccgc
+     2581 tttccagtcg ggaaacctgt cgtgccagct gcattaatga atcggccaac gcgcggggag
+     2641 aggcggtttg cgtattgggc gctcttccgc ttcctcgctc actgactcgc tgcgctcggt
+     2701 cgttcggctg cggcgagcgg tatcagctca ctcaaaggcg gtaatacggt tatccacaga
+     2761 atcaggggat aacgcaggaa agaacatgtg agcaaaaggc cagcaaaagg ccaggaaccg
+     2821 taaaaaggcc gcgttgctgg cgtttttcca taggctccgc ccccctgacg agcatcacaa
+     2881 aaatcgacgc tcaagtcaga ggtggcgaaa cccgacagga ctataaagat accaggcgtt
+     2941 tccccctgga agctccctcg tgcgctctcc tgttccgacc ctgccgctta ccggatacct
+     3001 gtccgccttt ctcccttcgg gaagcgtggc gctttctcat agctcacgct gtaggtatct
+     3061 cagttcggtg taggtcgttc gctccaagct gggctgtgtg cacgaacccc ccgttcagcc
+     3121 cgaccgctgc gccttatccg gtaactatcg tcttgagtcc aacccggtaa gacacgactt
+     3181 atcgccactg gcagcagcca ctggtaacag gattagcaga gcgaggtatg taggcggtgc
+     3241 tacagagttc ttgaagtggt ggcctaacta cggctacact agaaggacag tatttggtat
+     3301 ctgcgctctg ctgaagccag ttaccttcgg aaaaagagtt ggtagctctt gatccggcaa
+     3361 acaaaccacc gctggtagcg gtggtttttt tgtttgcaag cagcagatta cgcgcagaaa
+     3421 aaaaggatct caagaagatc ctttgatctt ttctacgggg tctgacgctc agtggaacga
+     3481 aaactcacgt taagggattt tggtcatgag attatcaaaa aggatcttca cctagatcct
+     3541 tttaaattaa aaatgaagtt ttaaatcaat ctaaagtata tatgagtaaa cttggtctga
+     3601 cagttaccaa tgcttaatca gtgaggcacc tatctcagcg atctgtctat ttcgttcatc
+     3661 catagttgcc tgactccccg tcgtgtagat aactacgata cgggagggct taccatctgg
+     3721 ccccagtgct gcaatgatac cgcgagaccc acgctcaccg gctccagatt tatcagcaat
+     3781 aaaccagcca gccggaaggg ccgagcgcag aagtggtcct gcaactttat ccgcctccat
+     3841 ccagtctatt aattgttgcc gggaagctag agtaagtagt tcgccagtta atagtttgcg
+     3901 caacgttgtt gccattgcta caggcatcgt ggtgtcacgc tcgtcgtttg gtatggcttc
+     3961 attcagctcc ggttcccaac gatcaaggcg agttacatga tcccccatgt tgtgcaaaaa
+     4021 agcggttagc tccttcggtc ctccgatcgt tgtcagaagt aagttggccg cagtgttatc
+     4081 actcatggtt atggcagcac tgcataattc tcttactgtc atgccatccg taagatgctt
+     4141 ttctgtgact ggtgagtact caaccaagtc attctgagaa tagtgtatgc ggcgaccgag
+     4201 ttgctcttgc ccggcgtcaa tacgggataa taccgcgcca catagcagaa ctttaaaagt
+     4261 gctcatcatt ggaaaacgtt cttcggggcg aaaactctca aggatcttac cgctgttgag
+     4321 atccagttcg atgtaaccca ctcgtgcacc caactgatct tcagcatctt ttactttcac
+     4381 cagcgtttct gggtgagcaa aaacaggaag gcaaaatgcc gcaaaaaagg gaataagggc
+     4441 gacacggaaa tgttgaatac tcatactctt cctttttcaa tattattgaa gcatttatca
+     4501 gggttattgt ctcatgagcg gatacatatt tgaatgtatt tagaaaaata aacaaatagg
+     4561 ggttccgcgc acatttcccc gaaaagtgcc acctgacgtc taagaaacca ttattatcat
+     4621 gacattaacc tataaaaata ggcgtatcac gaggcccttt cgtc
+//

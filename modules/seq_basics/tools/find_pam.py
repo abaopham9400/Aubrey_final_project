@@ -112,5 +112,8 @@ if __name__ == "__main__":
     test = "pBR322"
     print(f"Test #6: {find_pam(test)}") # should detect all PAM in pBR322
 
+    test = "pHW001"
+    print(f"Test #6: {find_pam(test)}") # should detect all PAM in pBR322
+
     #test = "CTCTAGATGCTTGGCTCAGAGTACGATCAACATGCGAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
-    #print(f"Test #7: {find_pam(test)}") # should throw an error
+    #print(f"Test #8: {find_pam(test)}") # should throw an error

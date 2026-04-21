@@ -1,0 +1,133 @@
+LOCUS       X65304                  2743 bp    DNA     circular SYN 07-JUN-2004
+DEFINITION  Cloning vector pGEM-3Z.
+ACCESSION   X65304
+VERSION     X65304.3
+KEYWORDS    beta-lactamase; bla gene; cloning vector; lacZ gene; multiple
+            cloning site; promoter.
+SOURCE      Cloning vector pGEM-3Z
+  ORGANISM  Cloning vector pGEM-3Z
+            other sequences; artificial sequences; vectors.
+REFERENCE   1
+  AUTHORS   Technical,Services.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (23-MAR-1992) Technical Services, Promega Corporation,
+            2800 Woods Hollow Road, Madison, Wi 53711-5399, USA
+  REMARK    revised by [2]
+REFERENCE   2
+  AUTHORS   Technical,Services.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (28-MAY-1993) Technical Services, Promega Corporation,
+            2800 Woods Hollow Road, Madison, Wi 53711-5399, USA
+  REMARK    revised by [3]
+REFERENCE   3
+  AUTHORS   Technical,Services.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (26-JAN-2000) Technical Services, Promega Corporation,
+            2800 Woods Hollow Road, Madison, Wi 53711-5399, USA
+  REMARK    revised by [4]
+REFERENCE   4  (bases 1 to 2743)
+  AUTHORS   Technical,Services.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (18-FEB-2000) Technical Services, Promega Corporation,
+            2800 Woods Hollow Road, Madison, Wi 53711-5399, USA
+COMMENT     On Feb 21, 2000 this sequence version replaced X65304.2.
+            See X65300-X65335 for related vector sequences
+            
+            This vector can be obtained from Promega Corporation, Madison, WI.
+            Call one of the following numbers for order or technical
+            information:
+            Order or Technical 800-356-9526
+            In Wisconsin       800-356-9526
+            Outside U.S.       608-274-4330.
+FEATURES             Location/Qualifiers
+     source          1..2743
+                     /organism="Cloning vector pGEM-3Z"
+                     /mol_type="other DNA"
+                     /db_xref="taxon:90110"
+     misc_feature    join(2564..2724,94..323)
+                     /note="lac operon sequence"
+     regulatory      join(2727..2743,1..3)
+                     /regulatory_class="promoter"
+                     /note="T7 promoter"
+     misc_feature    1
+                     /note="T7 transcription initiation site"
+     misc_feature    5..61
+                     /note="multiple cloning sites"
+     regulatory      67..86
+                     /regulatory_class="promoter"
+                     /note="SP6 promoter"
+     misc_feature    69
+                     /note="SP6 transcription initiation site"
+     primer_bind     complement(104..125)
+                     /note="pUC/M13 reverse sequencing primer"
+     gene            complement(106..108)
+                     /gene="lacZ"
+     misc_feature    complement(106..108)
+                     /gene="lacZ"
+                     /note="lacZ start codon"
+     misc_feature    128..144
+                     /note="lac operator"
+     gene            complement(1265..2125)
+                     /gene="bla"
+     CDS             complement(1265..2125)
+                     /gene="bla"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="beta-lactamase"
+                     /protein_id="CAA46396.2"
+                     /translation="MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGY
+                     IELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRIDAGQEQLGRRIHYSQNDLVE
+                     YSPVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRL
+                     DRWEPELNEAIPNDERDTTMPVAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPL
+                     LRSALPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIA
+                     EIGASLIKHW"
+     primer_bind     2677..2700
+                     /note="pUC/M13 forward sequencing primer"
+ORIGIN      
+        1 gggcgaattc gagctcggta cccggggatc ctctagagtc gacctgcagg catgcaagct
+       61 tgagtattct atagtgtcac ctaaatagct tggcgtaatc atggtcatag ctgtttcctg
+      121 tgtgaaattg ttatccgctc acaattccac acaacatacg agccggaagc ataaagtgta
+      181 aagcctgggg tgcctaatga gtgagctaac tcacattaat tgcgttgcgc tcactgcccg
+      241 ctttccagtc gggaaacctg tcgtgccagc tgcattaatg aatcggccaa cgcgcgggga
+      301 gaggcggttt gcgtattggg cgctcttccg cttcctcgct cactgactcg ctgcgctcgg
+      361 tcgttcggct gcggcgagcg gtatcagctc actcaaaggc ggtaatacgg ttatccacag
+      421 aatcagggga taacgcagga aagaacatgt gagcaaaagg ccagcaaaag gccaggaacc
+      481 gtaaaaaggc cgcgttgctg gcgtttttcc ataggctccg cccccctgac gagcatcaca
+      541 aaaatcgacg ctcaagtcag aggtggcgaa acccgacagg actataaaga taccaggcgt
+      601 ttccccctgg aagctccctc gtgcgctctc ctgttccgac cctgccgctt accggatacc
+      661 tgtccgcctt tctcccttcg ggaagcgtgg cgctttctca tagctcacgc tgtaggtatc
+      721 tcagttcggt gtaggtcgtt cgctccaagc tgggctgtgt gcacgaaccc cccgttcagc
+      781 ccgaccgctg cgccttatcc ggtaactatc gtcttgagtc caacccggta agacacgact
+      841 tatcgccact ggcagcagcc actggtaaca ggattagcag agcgaggtat gtaggcggtg
+      901 ctacagagtt cttgaagtgg tggcctaact acggctacac tagaagaaca gtatttggta
+      961 tctgcgctct gctgaagcca gttaccttcg gaaaaagagt tggtagctct tgatccggca
+     1021 aacaaaccac cgctggtagc ggtggttttt ttgtttgcaa gcagcagatt acgcgcagaa
+     1081 aaaaaggatc tcaagaagat cctttgatct tttctacggg gtctgacgct cagtggaacg
+     1141 aaaactcacg ttaagggatt ttggtcatga gattatcaaa aaggatcttc acctagatcc
+     1201 ttttaaatta aaaatgaagt tttaaatcaa tctaaagtat atatgagtaa acttggtctg
+     1261 acagttacca atgcttaatc agtgaggcac ctatctcagc gatctgtcta tttcgttcat
+     1321 ccatagttgc ctgactcccc gtcgtgtaga taactacgat acgggagggc ttaccatctg
+     1381 gccccagtgc tgcaatgata ccgcgagacc cacgctcacc ggctccagat ttatcagcaa
+     1441 taaaccagcc agccggaagg gccgagcgca gaagtggtcc tgcaacttta tccgcctcca
+     1501 tccagtctat taattgttgc cgggaagcta gagtaagtag ttcgccagtt aatagtttgc
+     1561 gcaacgttgt tgccattgct acaggcatcg tggtgtcacg ctcgtcgttt ggtatggctt
+     1621 cattcagctc cggttcccaa cgatcaaggc gagttacatg atcccccatg ttgtgcaaaa
+     1681 aagcggttag ctccttcggt cctccgatcg ttgtcagaag taagttggcc gcagtgttat
+     1741 cactcatggt tatggcagca ctgcataatt ctcttactgt catgccatcc gtaagatgct
+     1801 tttctgtgac tggtgagtac tcaaccaagt cattctgaga atagtgtatg cggcgaccga
+     1861 gttgctcttg cccggcgtca atacgggata ataccgcgcc acatagcaga actttaaaag
+     1921 tgctcatcat tggaaaacgt tcttcggggc gaaaactctc aaggatctta ccgctgttga
+     1981 gatccagttc gatgtaaccc actcgtgcac ccaactgatc ttcagcatct tttactttca
+     2041 ccagcgtttc tgggtgagca aaaacaggaa ggcaaaatgc cgcaaaaaag ggaataaggg
+     2101 cgacacggaa atgttgaata ctcatactct tcctttttca atattattga agcatttatc
+     2161 agggttattg tctcatgagc ggatacatat ttgaatgtat ttagaaaaat aaacaaatag
+     2221 gggttccgcg cacatttccc cgaaaagtgc cacctgacgt ctaagaaacc attattatca
+     2281 tgacattaac ctataaaaat aggcgtatca cgaggccctt tcgtctcgcg cgtttcggtg
+     2341 atgacggtga aaacctctga cacatgcagc tcccggagac ggtcacagct tgtctgtaag
+     2401 cggatgccgg gagcagacaa gcccgtcagg gcgcgtcagc gggtgttggc gggtgtcggg
+     2461 gctggcttaa ctatgcggca tcagagcaga ttgtactgag agtgcaccat atgcggtgtg
+     2521 aaataccgca cagatgcgta aggagaaaat accgcatcag gcgccattcg ccattcaggc
+     2581 tgcgcaactg ttgggaaggg cgatcggtgc gggcctcttc gctattacgc cagctggcga
+     2641 aagggggatg tgctgcaagg cgattaagtt gggtaacgcc agggttttcc cagtcacgac
+     2701 gttgtaaaac gacggccagt gaattgtaat acgactcact ata
+//
