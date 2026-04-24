@@ -1,24 +1,38 @@
+import requests
 import re
 
-# input a plasmid name i.e. pBR322
-def get_sequence(seq_name):
+def get_sequence(symbol, species="human"):
+    # determines if input is a raw sequence
     valid_nucleotides = {'A', 'T', 'C', 'G'}
-    if all(nucleotide in valid_nucleotides for nucleotide in seq_name):
-        return seq_name
+    if all(nucleotide in valid_nucleotides for nucleotide in symbol):
+        return symbol
 
-    with open(f"modules/seq_basics/data/{seq_name}.gb", "r") as f:
-        content = f.read()
-        # Find the ORIGIN section (the actual DNA sequence)
-        sequence_match = re.search(r"ORIGIN\s+(.*)//", content, re.DOTALL)
-        if sequence_match:
-            # Clean out numbers and whitespace
-            raw_seq = sequence_match.group(1)
-            clean_seq = "".join(re.findall(r'[atgc]+', raw_seq.lower()))
-            return clean_seq.upper()
-        
-if __name__ == "__main__":
-    seq = get_sequence("pBR322")
-    print(f"Sequence length: {len(seq)}")
+    server = "https://rest.ensembl.org"
+    
+    # 1. Get the Ensembl ID
+    ext = f"/lookup/symbol/{species}/{symbol}?"
+    r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+    gene_id = r.json().get("id")
+    
+    # 2. Get the sequence
+    ext = f"/sequence/id/{gene_id}?"
+    r = requests.get(server + ext, headers={"Content-Type": "text/x-fasta"})
+    clean_test = r.text.replace("\n", "").replace("\r", "").replace(" ", "").upper()
+    just_dna = clean_test.split(":")[-1][2:]
+    return just_dna
 
-    seq = get_sequence("ACTGACTGCGTAACTGACTGACGTACGTACTGACGTACTG")
-    print(f"Sequence length: {seq}")
+def get_just_the_dna(data):
+    parts = data.strip().split('\n', 1) 
+
+    # 2. Get the sequence (the second part of the split)
+    # We then use re to remove any internal newlines or spaces
+    if len(parts) > 1:
+        sequence = re.sub(r'\s+', '', parts[1])
+    else:
+        sequence = "No DNA found after header"
+    
+    return sequence
+
+#print(get_sequence("BRCA2"))
+#print(get_sequence("TP53"))
+print(get_sequence("PTEN"))

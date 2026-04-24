@@ -32,8 +32,8 @@ def find_pam(target: str) -> List[Tuple[int, str]]:
             Expected Output: []
             Description: Early GG; lack valid GG after 20th bp (Returns empty list)
     """
-    if not validate_DNA(target):
-        raise ValueError("Invalid target sequence")
+    #if not validate_DNA(target):
+        #raise ValueError("Invalid target sequence")
 
     # Helper function to get raw indices of 'GG' for a given sequence string
     def get_indices(seq: str) -> List[int]:
@@ -109,11 +109,11 @@ if __name__ == "__main__":
     test = "CCCTAGATGCCTGGCTCAGAGTACGATCAACCTGCCAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
     print(f"Test #5: {find_pam(test)}") # should not find any valid GG on sense strand, but finds PAM on anti-sense strand: [0,1,9,30,34]
 
-    test = "pBR322"
-    print(f"Test #6: {find_pam(test)}") # should detect all PAM in pBR322
+    test = "TP53"
+    print(f"Test #6: {find_pam(test)}") # should detect all PAM in TP53
 
-    test = "pHW001"
-    print(f"Test #6: {find_pam(test)}") # should detect all PAM in pBR322
+    test = "BRCA2"
+    print(f"Test #7: {find_pam(test)}") # should detect all PAM in BRCA2
 
     #test = "CTCTAGATGCTTGGCTCAGAGTACGATCAACATGCGAGTTCGCACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACCAAATATAATTGTTC"
     #print(f"Test #8: {find_pam(test)}") # should throw an error

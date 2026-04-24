@@ -81,29 +81,17 @@ if __name__ == "__main__":
     valid = design_cas9_RNA(test)
     print(f"Test #4: {len(valid)} gRNA") # tests on large genomes
 
-    test = "pBR322"
+    test = "BRCA2"
     valid = design_cas9_RNA(test)
     print(f"Test #5: {len(valid)} gRNA") # tests on plasmid name
 
-    test = "pHW001"
+    test = "TP53"
     valid = design_cas9_RNA(test)
-    print(f"Test #6: {len(valid)} gRNA") # should detect pHW001
+    print(f"Test #6: {len(valid)} gRNA") # should detect TP53
 
-    test = "pGEM-3Z"
+    test = "PTEN"
     valid = design_cas9_RNA(test)
-    print(f"Test #6: {len(valid)} gRNA") # should detect pGEM-3Z
-
-    test = "pACYC184"
-    valid = design_cas9_RNA(test)
-    print(f"Test #6: {len(valid)} gRNA") # should detect pACYC184
-
-    test = "Bla"
-    valid = design_cas9_RNA(test)
-    print(f"Test #7: {len(valid)} gRNA") # should detect Bla
-
-    test = "HPRT1"
-    valid = design_cas9_RNA(test)
-    print(f"Test #7: {len(valid)} gRNA") # should detect HPRT1
+    print(f"Test #7: {len(valid)} gRNA") # should detect PTEN
 
     #test = "CTCTAGATGTCTGGCTCAGAAACATGCGAGTTGACACGTTTTTTTCTTTTGTCTTTAGTTCTCACGTTTGTCATACTTGACAACGCTTCTTTAACGAAATATAATTGTTC"
     #valid = design_cas9_RNA(test) == []
