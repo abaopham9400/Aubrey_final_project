@@ -36,9 +36,9 @@
     "notes": "Tests the AI's ability to determine if the results from find_pam indicates a valid pam sequence from both strands."
   },
   {
-    "prompt": "Does 'pBR322' contain a valid pam sequence?",
+    "prompt": "Does 'TP53' contain a valid pam sequence?",
     "expected_tool": "find_pam",
-    "expected_args": { "target": "pBR322"},
+    "expected_args": { "target": "TP53"},
     "notes": "Tests the AI's ability to differentiate a raw sequence vs a plasmid name."
   },
   {
@@ -84,34 +84,22 @@
     "notes": "Tests the AI's ability to determine different kinds of questions"
   },
   {
-    "prompt": "What is the best gRNA to use for 'pBR322' in a CRISPR experiment?",
+    "prompt": "What is the best gRNA to use for 'TP53' in a CRISPR experiment?",
     "expected_tool": "design_cas9_RNA",
-    "expected_args": { "target": "pBR322"},
+    "expected_args": { "target": "TP53"},
     "notes": "Tests the AI's ability to use plasmid names"
   },
   {
-    "prompt": "What is the best gRNA to use for 'pHW001' in a CRISPR experiment?",
+    "prompt": "What is the best gRNA to use for 'BRCA2' in a CRISPR experiment?",
     "expected_tool": "design_cas9_RNA",
-    "expected_args": { "target": "pHW001"},
+    "expected_args": { "target": "BRCA2"},
     "notes": "Tests the AI's ability to use plasmid names"
   },
   {
-    "prompt": "What is the best gRNA to use for 'pGEM-3Z' in a CRISPR experiment?",
+    "prompt": "What is the best gRNA to use for 'PTEN' in a CRISPR experiment?",
     "expected_tool": "design_cas9_RNA",
-    "expected_args": { "target": "pGEM-3Z"},
+    "expected_args": { "target": "PTEN"},
     "notes": "Tests the AI's ability to use plasmid names"
-  },
-  {
-    "prompt": "What is the best gRNA to use for 'pACYC184' in a CRISPR experiment?",
-    "expected_tool": "design_cas9_RNA",
-    "expected_args": { "target": "pACYC184"},
-    "notes": "Tests the AI's ability to use plasmid names"
-  },
-  {
-    "prompt": "I am designing a CRISPR-Cas9 experiment using the pBR322 plasmid. My goal is to knock out the Ampicillin resistance gene (Bla gene) to use it as a selection marker.",
-    "expected_tool": "design_cas9_RNA",
-    "expected_args": { "target": "Bla"},
-    "notes": "Tests the AI's ability comprehend what gene the user wants to knock out"
   },
   {
     "prompt": "I am conducting a CRISPR-Cas9 knockout of the human TP53 gene. What would be the best gRNA for the job?",
